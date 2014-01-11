@@ -2,34 +2,34 @@
 <html>
 <head>
 	<!--
-	Donation Address: 1NiNja1bUmhSoTXozBRBEtR8LeF9TGbZBN
+	Donation Address: PPW6NBgZzWXzW89HRg3V4M77eM3Zu5yDcR
 
 	Notice of Copyrights and Licenses:
 	***********************************
-	The bitaddress.org project, software and embedded resources are copyright bitaddress.org. 
-	The bitaddress.org name and logo are not part of the open source license.
+	The wallet.peercontalk.org project, software and embedded resources are copyright wallet.peercontalk.org. 
+	The wallet.peercontalk.org name and logo are not part of the open source license.
 
 	Portions of the all-in-one HTML document contain JavaScript codes that are the copyrights of others. 
 	The individual copyrights are included throughout the document along with their licenses.
 	Included JavaScript libraries are separated with HTML script tags.
 
-	Summary of JavaScript functions with a redistributable license:
+	Summary of JavaScript functions with a re-distributable license:
 	JavaScript function		License
 	*******************		***************
 	Array.prototype.map		Public Domain
 	window.Crypto			BSD License
 	window.SecureRandom		BSD License
-	window.EllipticCurve		BSD License
+	window.EllipticCurve	BSD License
 	window.BigInteger		BSD License
 	window.QRCode			MIT License
-	window.Bitcoin			MIT License
+	window.Peercoin			MIT License
 
-	The bitaddress.org software is available under The MIT License (MIT)
-	Copyright (c) 2011-2012 bitaddress.org
+	The wallet.peercontalk.org software is available under The MIT License (MIT)
+	Copyright (c) 2014 wallet.peercontalk.org
 
 	Permission is hereby granted, free of charge, to any person obtaining a copy of this software and 
 	associated documentation files (the "Software"), to deal in the Software without restriction, including 
-	without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or 
+	without limitation the rights to use, copy, modify, merge, publish, distribute, sub-license, and/or 
 	sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject 
 	to the following conditions:
 
@@ -42,7 +42,7 @@
 	WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE 
 	SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-	GitHub Repository: https://github.com/pointbiz/bitaddress.org
+	GitHub Repository: https://github.com/FuzzyBearBTC/peercoin-walletgenerator
 	-->
 
 	<title>wallet.peercointalk.org</title>
@@ -1052,12 +1052,12 @@
 			return R;
 		};
 
-		// patched by bitaddress.org and Casascius for use with Bitcoin.ECKey
+		// patched by bitaddress.org and Casascius for use with Peercoin.ECKey
 		// patched by coretechs to support compressed public keys
 		ec.PointFp.prototype.getEncoded = function (compressed) {
 			var x = this.getX().toBigInteger();
 			var y = this.getY().toBigInteger();
-			var len = 32; // integerToBytes will zero pad if integer is less than 32 bytes. 32 bytes length is required by the Bitcoin protocol.
+			var len = 32; // integerToBytes will zero pad if integer is less than 32 bytes. 32 bytes length is required by the Peercoin protocol.
 			var enc = ec.integerToBytes(x, len);
 
 			// when compressed prepend byte depending if y point is even or odd 
@@ -1330,9 +1330,9 @@
 		ec.X9Parameters.prototype.getN = function () { return this.n; };
 		ec.X9Parameters.prototype.getH = function () { return this.h; };
 
-		// secp256k1 is the Curve used by Bitcoin
+		// secp256k1 is the Curve used by Peercoin
 		ec.secNamedCurves = {
-			// used by Bitcoin
+			// used by Peercoin
 			"secp256k1": function () {
 				// p = 2^256 - 2^32 - 2^9 - 2^8 - 2^7 - 2^6 - 2^4 - 1
 				var p = ec.fromHex("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFC2F");
@@ -1348,7 +1348,7 @@
 			}
 		};
 
-		// secp256k1 called by Bitcoin's ECKEY
+		// secp256k1 called by Peercoin's ECKEY
 		ec.getSECCurveByName = function (name) {
 			if (ec.secNamedCurves[name] == undefined) return null;
 			return ec.secNamedCurves[name]();
@@ -3680,16 +3680,16 @@
 
 		//https://raw.github.com/bitcoinjs/bitcoinjs-lib/1a7fc9d063f864058809d06ef4542af40be3558f/src/bitcoin.js
 		(function (exports) {
-			var Bitcoin = exports;
+			var Peercoin = exports;
 		})(
-			'object' === typeof module ? module.exports : (window.Bitcoin = {})
+			'object' === typeof module ? module.exports : (window.Peercoin = {})
 		);
 	</script>
 
 	<script type="text/javascript">
 		//https://raw.github.com/bitcoinjs/bitcoinjs-lib/c952aaeb3ee472e3776655b8ea07299ebed702c7/src/base58.js
-		(function (Bitcoin) {
-			Bitcoin.Base58 = {
+		(function (Peercoin) {
+			Peercoin.Base58 = {
 				alphabet: "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz",
 				validRegex: /^[1-9A-HJ-NP-Za-km-z]+$/,
 				base: BigInteger.valueOf(58),
@@ -3697,7 +3697,7 @@
 				/**
 				* Convert a byte array to a base58-encoded string.
 				*
-				* Written by Mike Hearn for BitcoinJ.
+				* Written by Mike Hearn for PeercoinJ.
 				*   Copyright (c) 2011 Google Inc.
 				*
 				* Ported to JavaScript by Stefan Thomas.
@@ -3755,30 +3755,30 @@
 				}
 			};
 
-			var B58 = Bitcoin.Base58;
+			var B58 = Peercoin.Base58;
 		})(
-		'undefined' != typeof Bitcoin ? Bitcoin : module.exports
+		'undefined' != typeof Peercoin ? Peercoin : module.exports
 		);
 	</script>
 
 	<script type="text/javascript">
 		//https://raw.github.com/bitcoinjs/bitcoinjs-lib/09e8c6e184d6501a0c2c59d73ca64db5c0d3eb95/src/address.js
-		Bitcoin.Address = function (bytes) {
+		Peercoin.Address = function (bytes) {
 			if ("string" == typeof bytes) {
-				bytes = Bitcoin.Address.decodeString(bytes);
+				bytes = Peercoin.Address.decodeString(bytes);
 			}
 			this.hash = bytes;
-			this.version = Bitcoin.Address.networkVersion;
+			this.version = Peercoin.Address.networkVersion;
 		};
 
-		Bitcoin.Address.networkVersion = 0x00; // mainnet
+		Peercoin.Address.networkVersion = 0x37; // Peercoin mainnet
 
 		/**
-		* Serialize this object as a standard Bitcoin address.
+		* Serialize this object as a standard Peercoin address.
 		*
 		* Returns the address as a base58-encoded string in the standardized format.
 		*/
-		Bitcoin.Address.prototype.toString = function () {
+		Peercoin.Address.prototype.toString = function () {
 			// Get a copy of the hash
 			var hash = this.hash.slice(0);
 
@@ -3786,18 +3786,18 @@
 			hash.unshift(this.version);
 			var checksum = Crypto.SHA256(Crypto.SHA256(hash, { asBytes: true }), { asBytes: true });
 			var bytes = hash.concat(checksum.slice(0, 4));
-			return Bitcoin.Base58.encode(bytes);
+			return Peercoin.Base58.encode(bytes);
 		};
 
-		Bitcoin.Address.prototype.getHashBase64 = function () {
+		Peercoin.Address.prototype.getHashBase64 = function () {
 			return Crypto.util.bytesToBase64(this.hash);
 		};
 
 		/**
-		* Parse a Bitcoin address contained in a string.
+		* Parse a Peercoin address contained in a string.
 		*/
-		Bitcoin.Address.decodeString = function (string) {
-			var bytes = Bitcoin.Base58.decode(string);
+		Peercoin.Address.decodeString = function (string) {
+			var bytes = Peercoin.Base58.decode(string);
 			var hash = bytes.slice(0, 21);
 			var checksum = Crypto.SHA256(Crypto.SHA256(hash, { asBytes: true }), { asBytes: true });
 
@@ -3820,7 +3820,7 @@
 
 	<script type="text/javascript">
 		//https://raw.github.com/bitcoinjs/bitcoinjs-lib/e90780d3d3b8fc0d027d2bcb38b80479902f223e/src/ecdsa.js
-		Bitcoin.ECDSA = (function () {
+		Peercoin.ECDSA = (function () {
 			var ecparams = EllipticCurve.getSECCurveByName("secp256k1");
 			var rng = new SecureRandom();
 
@@ -3877,7 +3877,7 @@
 
 				verify: function (hash, sig, pubkey) {
 					var r, s;
-					if (Bitcoin.Util.isArray(sig)) {
+					if (Peercoin.Util.isArray(sig)) {
 						var obj = ECDSA.parseSig(sig);
 						r = obj.r;
 						s = obj.s;
@@ -3891,7 +3891,7 @@
 					var Q;
 					if (pubkey instanceof ec.PointFp) {
 						Q = pubkey;
-					} else if (Bitcoin.Util.isArray(pubkey)) {
+					} else if (Peercoin.Util.isArray(pubkey)) {
 						Q = EllipticCurve.PointFp.decodeFrom(ecparams.getCurve(), pubkey);
 					} else {
 						throw "Invalid format for pubkey value, must be byte array or ec.PointFp";
@@ -4071,7 +4071,7 @@
 						throw "Pubkey recovery unsuccessful";
 					}
 
-					var pubKey = new Bitcoin.ECKey();
+					var pubKey = new Peercoin.ECKey();
 					pubKey.pub = Q;
 					return pubKey;
 				},
@@ -4081,7 +4081,7 @@
 				*
 				* When extracting a pubkey from a signature, we have to
 				* distinguish four different cases. Rather than putting this
-				* burden on the verifier, Bitcoin includes a 2-bit value with the
+				* burden on the verifier, Peercoin includes a 2-bit value with the
 				* signature.
 				*
 				* This function simply tries all four cases and returns the value
@@ -4090,8 +4090,8 @@
 				calcPubkeyRecoveryParam: function (address, r, s, hash) {
 					for (var i = 0; i < 4; i++) {
 						try {
-							var pubkey = Bitcoin.ECDSA.recoverPubKey(r, s, hash, i);
-							if (pubkey.getBitcoinAddress().toString() == address) {
+							var pubkey = Peercoin.ECDSA.recoverPubKey(r, s, hash, i);
+							if (pubkey.getPeercoinAddress().toString() == address) {
 								return i;
 							}
 						} catch (e) { }
@@ -4106,8 +4106,8 @@
 
 	<script type="text/javascript">
 		//https://raw.github.com/pointbiz/bitcoinjs-lib/9b2f94a028a7bc9bed94e0722563e9ff1d8e8db8/src/eckey.js
-		Bitcoin.ECKey = (function () {
-			var ECDSA = Bitcoin.ECDSA;
+		Peercoin.ECKey = (function () {
+			var ECDSA = Peercoin.ECDSA;
 			var ecparams = EllipticCurve.getSECCurveByName("secp256k1");
 			var rng = new SecureRandom();
 
@@ -4119,7 +4119,7 @@
 				} else if (input instanceof BigInteger) {
 					// Input is a private key value
 					this.priv = input;
-				} else if (Bitcoin.Util.isArray(input)) {
+				} else if (Peercoin.Util.isArray(input)) {
 					// Prepend zero byte to prevent interpretation as negative integer
 					this.priv = BigInteger.fromByteArrayUnsigned(input);
 				} else if ("string" == typeof input) {
@@ -4148,7 +4148,7 @@
 				this.compressed = (this.compressed == undefined) ? !!ECKey.compressByDefault : this.compressed;
 			};
 
-			ECKey.privateKeyPrefix = 0x80; // mainnet 0x80    testnet 0xEF
+			ECKey.privateKeyPrefix = 0xb7; // peercoin mainnet 0xb7    bitcoin testnet 0xEF
 
 			/**
 			* Whether public keys should be returned compressed by default.
@@ -4206,16 +4206,16 @@
 			ECKey.prototype.getPubKeyHash = function () {
 				if (this.compressed) {
 					if (this.pubKeyHashComp) return this.pubKeyHashComp;
-					return this.pubKeyHashComp = Bitcoin.Util.sha256ripe160(this.getPub());
+					return this.pubKeyHashComp = Peercoin.Util.sha256ripe160(this.getPub());
 				} else {
 					if (this.pubKeyHashUncomp) return this.pubKeyHashUncomp;
-					return this.pubKeyHashUncomp = Bitcoin.Util.sha256ripe160(this.getPub());
+					return this.pubKeyHashUncomp = Peercoin.Util.sha256ripe160(this.getPub());
 				}
 			};
 
-			ECKey.prototype.getBitcoinAddress = function () {
+			ECKey.prototype.getPeercoinAddress = function () {
 				var hash = this.getPubKeyHash();
-				var addr = new Bitcoin.Address(hash);
+				var addr = new Peercoin.Address(hash);
 				return addr.toString();
 			};
 
@@ -4224,7 +4224,7 @@
 			*/
 			ECKey.prototype.setPub = function (pub) {
 				// byte array
-				if (Bitcoin.Util.isArray(pub)) {
+				if (Peercoin.Util.isArray(pub)) {
 					pub = Crypto.util.bytesToHex(pub).toString().toUpperCase();
 				}
 				var ecPoint = ecparams.getCurve().decodePointHex(pub);
@@ -4233,27 +4233,27 @@
 			};
 
 			// Sipa Private Key Wallet Import Format 
-			ECKey.prototype.getBitcoinWalletImportFormat = function () {
-				var bytes = this.getBitcoinPrivateKeyByteArray();
+			ECKey.prototype.getPeercoinWalletImportFormat = function () {
+				var bytes = this.getPeercoinPrivateKeyByteArray();
 				bytes.unshift(ECKey.privateKeyPrefix); // prepend 0x80 byte
 				if (this.compressed) bytes.push(0x01); // append 0x01 byte for compressed format
 				var checksum = Crypto.SHA256(Crypto.SHA256(bytes, { asBytes: true }), { asBytes: true });
 				bytes = bytes.concat(checksum.slice(0, 4));
-				var privWif = Bitcoin.Base58.encode(bytes);
+				var privWif = Peercoin.Base58.encode(bytes);
 				return privWif;
 			};
 
 			// Private Key Hex Format 
-			ECKey.prototype.getBitcoinHexFormat = function () {
-				return Crypto.util.bytesToHex(this.getBitcoinPrivateKeyByteArray()).toString().toUpperCase();
+			ECKey.prototype.getPeercoinHexFormat = function () {
+				return Crypto.util.bytesToHex(this.getPeercoinPrivateKeyByteArray()).toString().toUpperCase();
 			};
 
 			// Private Key Base64 Format 
-			ECKey.prototype.getBitcoinBase64Format = function () {
-				return Crypto.util.bytesToBase64(this.getBitcoinPrivateKeyByteArray());
+			ECKey.prototype.getPeercoinBase64Format = function () {
+				return Crypto.util.bytesToBase64(this.getPeercoinPrivateKeyByteArray());
 			};
 
-			ECKey.prototype.getBitcoinPrivateKeyByteArray = function () {
+			ECKey.prototype.getPeercoinPrivateKeyByteArray = function () {
 				// Get a copy of private key as a byte array
 				var bytes = this.priv.toByteArrayUnsigned();
 				// zero pad if private key is less than 32 bytes 
@@ -4264,14 +4264,14 @@
 			ECKey.prototype.toString = function (format) {
 				format = format || "";
 				if (format.toString().toLowerCase() == "base64" || format.toString().toLowerCase() == "b64") {
-					return this.getBitcoinBase64Format();
+					return this.getPeercoinBase64Format();
 				}
 				// Wallet Import Format
 				else if (format.toString().toLowerCase() == "wif") {
-					return this.getBitcoinWalletImportFormat();
+					return this.getPeercoinWalletImportFormat();
 				}
 				else {
-					return this.getBitcoinHexFormat();
+					return this.getPeercoinHexFormat();
 				}
 			};
 
@@ -4287,7 +4287,7 @@
 			* Parse a wallet import format private key contained in a string.
 			*/
 			ECKey.decodeWalletImportFormat = function (privStr) {
-				var bytes = Bitcoin.Base58.decode(privStr);
+				var bytes = Peercoin.Base58.decode(privStr);
 				var hash = bytes.slice(0, 33);
 				var checksum = Crypto.SHA256(Crypto.SHA256(hash, { asBytes: true }), { asBytes: true });
 				if (checksum[0] != bytes[33] ||
@@ -4307,7 +4307,7 @@
 			* Parse a compressed wallet import format private key contained in a string.
 			*/
 			ECKey.decodeCompressedWalletImportFormat = function (privStr) {
-				var bytes = Bitcoin.Base58.decode(privStr);
+				var bytes = Peercoin.Base58.decode(privStr);
 				var hash = bytes.slice(0, 34);
 				var checksum = Crypto.SHA256(Crypto.SHA256(hash, { asBytes: true }), { asBytes: true });
 				if (checksum[0] != bytes[34] ||
@@ -4330,18 +4330,18 @@
 				return /^[A-Fa-f0-9]{64}$/.test(key);
 			};
 
-			// 51 characters base58, always starts with a '5'
+			// 51 characters base58, always starts with a '7'
 			ECKey.isWalletImportFormat = function (key) {
 				key = key.toString();
-				return (ECKey.privateKeyPrefix == 0x80) ?
-							(/^5[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{50}$/.test(key)) :
+				return (ECKey.privateKeyPrefix == 0xb7) ?
+							(/^7[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{50}$/.test(key)) :
 							(/^9[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{50}$/.test(key));
 			};
 
 			// 52 characters base58
 			ECKey.isCompressedWalletImportFormat = function (key) {
 				key = key.toString();
-				return (ECKey.privateKeyPrefix == 0x80) ?
+				return (ECKey.privateKeyPrefix == 0xb7) ?
 							(/^[LK][123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{51}$/.test(key)) :
 							(/^c[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{51}$/.test(key));
 			};
@@ -4369,8 +4369,8 @@
 
 	<script type="text/javascript">
 		//https://raw.github.com/bitcoinjs/bitcoinjs-lib/09e8c6e184d6501a0c2c59d73ca64db5c0d3eb95/src/util.js
-		// Bitcoin utility functions
-		Bitcoin.Util = {
+		// Peercoin utility functions
+		Peercoin.Util = {
 			/**
 			* Cross-browser compatibility version of Array.isArray.
 			*/
@@ -4391,7 +4391,7 @@
 			/**
 			* Turn an integer into a "var_int".
 			*
-			* "var_int" is a variable length integer used by Bitcoin's binary format.
+			* "var_int" is a variable length integer used by Peercoin's binary format.
 			*
 			* Returns a byte array.
 			*/
@@ -4411,7 +4411,7 @@
 				}
 			},
 			/**
-			* Parse a Bitcoin value byte array, returning a BigInteger.
+			* Parse a Peercoin value byte array, returning a BigInteger.
 			*/
 			valueToBigInt: function (valueBuffer) {
 				if (valueBuffer instanceof BigInteger) return valueBuffer;
@@ -4420,9 +4420,9 @@
 				return BigInteger.fromByteArrayUnsigned(valueBuffer);
 			},
 			/**
-			* Format a Bitcoin value as a string.
+			* Format a Peercoin value as a string.
 			*
-			* Takes a BigInteger or byte-array and returns that amount of Bitcoins in a
+			* Takes a BigInteger or byte-array and returns that amount of Peercoins in a
 			* nice standard formatting.
 			*
 			* Examples:
@@ -4441,7 +4441,7 @@
 				return integerPart + "." + decimalPart;
 			},
 			/**
-			* Parse a floating point string as a Bitcoin value.
+			* Parse a floating point string as a Peercoin value.
 			*
 			* Keep in mind that parsing user input is messy. You should always display
 			* the parsed value back to the user to make sure we understood his input
@@ -4625,11 +4625,11 @@
 	<div id="main">
 		<div id="culturemenu">
 			<span><a href="?culture=en" id="cultureen" class="selected">English</a></span> | 
-			<span><a href="?culture=es" id="culturees">Espa�ol</a></span> | 
-			<span><a href="?culture=fr" id="culturefr">Fran�ais</a></span>
+			<span><a href="?culture=es" id="culturees">Espa񯬼/a></span> | 
+			<span><a href="?culture=fr" id="culturefr">Fran袩s</a></span>
 		</div>
-		<img alt="bitaddress.org" title="bitaddress.org" id="logo" src="data:image/png;base64,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" />
-		<div id="tagline">Open Source JavaScript Client-Side Bitcoin Wallet Generator</div>
+		<img alt="wallet.peercointalk.org" title="wallet.peercointalk.org" id="logo" src="" />
+		<div id="tagline">Open Source JavaScript Client-Side Peercoin Wallet Generator</div>
 		<div id="testnet"></div>
 		<div class="menu" id="menu">
 			<div class="tab selected" id="singlewallet" onclick="ninja.tabSwitch(this);">Single Wallet</div>
@@ -4641,7 +4641,7 @@
 		</div>
 		
 		<div id="generate">
-			<span id="generatelabelbitcoinaddress">Generating Bitcoin Address...</span><br />
+			<span id="generatelabelpeercoinaddress">Generating Peercoin Address...</span><br />
 			<span id="generatelabelmovemouse">MOVE your mouse around to add some extra randomness...</span><br />
 		</div>
 
@@ -4657,7 +4657,7 @@
 					<div class="public">
 						<div id="qrcode_public" class="qrcode_public"></div>
 						<div class="pubaddress">
-							<span class="label" id="singlelabelbitcoinaddress">Bitcoin Address:</span>
+							<span class="label" id="singlelabelpeercoinaddress">Peercoin Address:</span>
 							<span class="output" id="btcaddress"></span>
 						</div>
 					</div>
@@ -4696,23 +4696,23 @@
 				<div class="faqs">
 					<div id="bulkfaq1" class="bulkfaq"> 
 						<div id="bulkq1" class="bulkquestion" onclick="ninja.wallets.bulkwallet.openCloseFaq(1);">
-							<span id="bulklabelq1">Why should I use a Bulk Wallet to accept Bitcoins on my website?</span>
+							<span id="bulklabelq1">Why should I use a Bulk Wallet to accept Peercoins on my website?</span>
 							<div id="bulke1" class="more"></div>
 						</div>
-						<div id="bulka1" class="bulkanswer">The traditional approach to accepting bitcoins on your website requires that you install the official bitcoin client daemon ("bitcoind"). Many website hosting packages don't support installing the bitcoin daemon. Also, running the bitcoin daemon on your web server means your private keys are hosted on the server and could get stolen if your web server is hacked. When using a Bulk Wallet you can upload only the bitcoin addresses and not the private keys to your web server. Then you don't have to worry about your bitcoin wallet being stolen if your web server is hacked. </div>
+						<div id="bulka1" class="bulkanswer">The traditional approach to accepting peercoins on your website requires that you install the official peercoin client daemon ("ppcoind"). Many website hosting packages don't support installing the peercoin daemon. Also, running the peercoin daemon on your web server means your private keys are hosted on the server and could get stolen if your web server is hacked. When using a Bulk Wallet you can upload only the peercoin addresses and not the private keys to your web server. Then you don't have to worry about your peercoin wallet being stolen if your web server is hacked. </div>
 					</div>
 					<div id="bulkfaq2" class="bulkfaq"> 
 						<div id="bulkq2" class="bulkquestion" onclick="ninja.wallets.bulkwallet.openCloseFaq(2);">
-							<span id="bulklabelq2">How do I use a Bulk Wallet to accept Bitcoins on my website?</span>
+							<span id="bulklabelq2">How do I use a Bulk Wallet to accept Peercoins on my website?</span>
 							<div id="bulke2" class="more"></div>
 						</div>
 						<div id="bulka2" class="bulkanswer">
 							<ol>
-							<li id="bulklabela2li1">Use the Bulk Wallet tab to pre-generate a large number of bitcoin addresses (10,000+). Copy and paste the generated comma separated values (CSV) list to a secure text file on your computer. Backup the file you just created to a secure location.</li>
-							<li id="bulklabela2li2">Import the bitcoin addresses into a database table on your web server. (Don't put the wallet/private keys on your web server, otherwise you risk hackers stealing your coins. Just the bitcoin addresses as they will be shown to customers.)</li>
-							<li id="bulklabela2li3">Provide an option on your website's shopping cart for your customer to pay in Bitcoin. When the customer chooses to pay in Bitcoin you will then display one of the addresses from your database to the customer as his "payment address" and save it with his shopping cart order.</li>
-							<li id="bulklabela2li4">You now need to be notified when the payment arrives. Google "bitcoin payment notification" and subscribe to at least one bitcoin payment notification service. There are various services that will notify you via Web Services, API, SMS, Email, etc. Once you receive this notification, which could be programmatically automated, you can process the customer's order. To manually check if a payment has arrived you can use Block Explorer. Replace THEADDRESSGOESHERE with the bitcoin address you are checking. It could take between 10 minutes to one hour for the transaction to be confirmed.<br />http://www.blockexplorer.com/address/THEADDRESSGOESHERE<br /><br />Unconfirmed transactions can be viewed at: http://blockchain.info/ <br />You should see the transaction there within 30 seconds.</li>
-							<li id="bulklabela2li5">Bitcoins will safely pile up on the block chain. Use the original wallet file you generated in step 1 to spend them.</li>
+							<li id="bulklabela2li1">Use the Bulk Wallet tab to pre-generate a large number of peercoin addresses (10,000+). Copy and paste the generated comma separated values (CSV) list to a secure text file on your computer. Backup the file you just created to a secure location.</li>
+							<li id="bulklabela2li2">Import the peercoin addresses into a database table on your web server. (Don't put the wallet/private keys on your web server, otherwise you risk hackers stealing your coins. Just the peercoin addresses as they will be shown to customers.)</li>
+							<li id="bulklabela2li3">Provide an option on your website's shopping cart for your customer to pay in Peercoin. When the customer chooses to pay in Peercoin you will then display one of the addresses from your database to the customer as his "payment address" and save it with his shopping cart order.</li>
+							<li id="bulklabela2li4">You now need to be notified when the payment arrives. Google "peercoin payment notification" and subscribe to at least one peercoin payment notification service. There are various services that will notify you via Web Services, API, SMS, Email, etc. Once you receive this notification, which could be programmatically automated, you can process the customer's order. To manually check if a payment has arrived you can use Block Explorer. Replace THEADDRESSGOESHERE with the peercoin address you are checking. It could take between 10 minutes to one hour for the transaction to be confirmed.<br />http://www.blockexplorer.com/address/THEADDRESSGOESHERE<br /><br />Unconfirmed transactions can be viewed at: http://blockchain.peercointalk.org/ <br />You should see the transaction there within 30 seconds.</li>
+							<li id="bulklabela2li5">Peercoins will safely pile up on the block chain. Use the original wallet file you generated in step 1 to spend them.</li>
 							</ol>
 						</div>
 					</div>
@@ -4738,7 +4738,7 @@
 					<div class="public">
 						<div id="brainqrcodepublic" class="qrcode_public"></div>
 						<div class="pubaddress">
-							<span class="label" id="brainlabelbitcoinaddress">Bitcoin Address:</span>
+							<span class="label" id="brainlabelpeercoinaddress">Peercoin Address:</span>
 							<span class="output" id="brainbtcaddress"></span>
 						</div>
 					</div>
@@ -4767,7 +4767,7 @@
 					<div>
 						<span class="label" id="vanitylabelstep1privatekey">Step 1 Private Key:</span>
 						<span class="output" id="vanityprivatekey"></span>
-						<br /><div class="notes" id="vanitylabelstep1privnotes">Copy and paste the above Private Key field into a text file. Ideally save to an encrypted drive. You will need this to retrieve the Bitcoin Private Key once the Pool has found your prefix.</div>
+						<br /><div class="notes" id="vanitylabelstep1privnotes">Copy and paste the above Private Key field into a text file. Ideally save to an encrypted drive. You will need this to retrieve the Peercoin Private Key once the Pool has found your prefix.</div>
 					</div>
 				</div>
 				<div id="vanitystep2label" class="expandable" onclick="ninja.wallets.vanitywallet.openCloseStep(2);">
@@ -4793,9 +4793,9 @@
 				</div>
 				<div id="vanitystep2area">
 					<div>
-						<span class="label" id="vanitylabelbitcoinaddress">Vanity Bitcoin Address:</span>
+						<span class="label" id="vanitylabelpeercoinaddress">Vanity Peercoin Address:</span>
 						<span class="output" id="vanityaddress"></span>
-						<br /><div class="notes" id="vanitylabelnotesbitcoinaddress">The above is your new address that should include your required prefix.</div>
+						<br /><div class="notes" id="vanitylabelnotespeercoinaddress">The above is your new address that should include your required prefix.</div>
 					</div>
 					
 					<div>
@@ -4820,19 +4820,19 @@
 				</div>
 				<div id="detailkeyarea">
 					<div class="notes">
-						<span id="detaillabelnote1">Your Bitcoin Private Key is a unique secret number that only you know. It can be encoded in a number of different formats. Below we show the Bitcoin Address and Public Key that corresponds to your Private Key as well as your Private Key in the most popular encoding formats (WIF, HEX, B64, MINI).</span>
+						<span id="detaillabelnote1">Your Peercoin Private Key is a unique secret number that only you know. It can be encoded in a number of different formats. Below we show the Peercoin Address and Public Key that corresponds to your Private Key as well as your Private Key in the most popular encoding formats (WIF, HEX, B64, MINI).</span>
 						<br /><br />
-						<span id="detaillabelnote2">Bitcoin v0.6+ stores public keys in compressed format. The client now also supports import and export of private keys with importprivkey/dumpprivkey. The format of the exported private key is determined by whether the address was generated in an old or new wallet.</span>
+						<span id="detaillabelnote2">Peercoin v0.3+ stores public keys in compressed format. The client now also supports import and export of private keys with importprivkey/dumpprivkey. The format of the exported private key is determined by whether the address was generated in an old or new wallet.</span>
 					</div>
 					<div class="item">
 						<div id="detailqrcodepublic" class="qrcode_public"></div>
-						<span class="label" id="detaillabelbitcoinaddress">Bitcoin Address:</span>
+						<span class="label" id="detaillabelpeercoinaddress">Peercoin Address:</span>
 						<span class="output" id="detailaddress"></span>
 					</div>
 					<br />
 					<div class="item right">
 						<div id="detailqrcodepubliccomp" class="qrcode_public"></div>
-						<span class="label" id="detaillabelbitcoinaddresscomp">Bitcoin Address (compressed):</span>
+						<span class="label" id="detaillabelpeercoinaddresscomp">Peercoin Address (compressed):</span>
 						<span class="output" id="detailaddresscomp"></span>
 					</div>
 					<br />
@@ -4876,18 +4876,17 @@
 		<div id="footer" class="footer">
 			<div class="authorbtc">
 				<div>
-					<span class="item"><span id="footerlabeldonations">Donations:</span> <b>1NiNja</b>1bUmhSoTXozBRBEtR8LeF9TGbZBN</span>
-					<span class="item"><a href="http://firstbits.com/1ninja" target="_blank">firstbits.com/1ninja</a></span>
+					<span class="item"><a href="http://donate.peercointalk.org/" target="_blank">Donate</a></span>
 					<span class="item" id="footerlabeltranslatedby"></span>
 				</div>
 			</div>
 			<div class="authorpgp">
-				<span class="item"><a href="ninja_bitaddress.org.txt" target="_blank" id="footerlabelpgp">PGP Public Key</a></span>
-				<span class="item"><a href="pgpsignedmsg.txt" target="_blank"><span id="footerlabelversion">Signed Version History</span> (v2.4)</a></span>
-				<span class="item"><a href="https://github.com/pointbiz/bitaddress.org" target="_blank" id="footerlabelgithub">GitHub Repository</a></span>
+				<!--<span class="item"><a href="ninja_bitaddress.org.txt" target="_blank" id="footerlabelpgp">PGP Public Key</a></span>
+				<span class="item"><a href="pgpsignedmsg.txt" target="_blank"><span id="footerlabelversion">Signed Version History</span> (v2.4)</a></span>-->
+				<span class="item"><a href="https://github.com/FuzzyBearBTC/peercoin-walletgenerator" target="_blank" id="footerlabelgithub">GitHub Repository</a></span>
 			</div>
 			<div class="copyright">
-				<span id="footerlabelcopyright1">Copyright bitaddress.org.</span>
+				<span id="footerlabelcopyright1">Copyright peercointalk.org.</span>
 				<span id="footerlabelcopyright2">JavaScript copyrights are included in the source.</span>
 				<span id="footerlabelnowarranty">No warranty.</span>
 			</div>
@@ -4900,33 +4899,33 @@
 		ninja.privateKey = {
 			isPrivateKey: function (key) {
 				return (
-					Bitcoin.ECKey.isWalletImportFormat(key) ||
-					Bitcoin.ECKey.isCompressedWalletImportFormat(key) ||
-					Bitcoin.ECKey.isHexFormat(key) ||
-					Bitcoin.ECKey.isBase64Format(key) ||
-					Bitcoin.ECKey.isMiniFormat(key)
+					Peercoin.ECKey.isWalletImportFormat(key) ||
+					Peercoin.ECKey.isCompressedWalletImportFormat(key) ||
+					Peercoin.ECKey.isHexFormat(key) ||
+					Peercoin.ECKey.isBase64Format(key) ||
+					Peercoin.ECKey.isMiniFormat(key)
 				);
 			},
 			getECKeyFromAdding: function (privKey1, privKey2) {
 				var n = EllipticCurve.getSECCurveByName("secp256k1").getN();
-				var ecKey1 = new Bitcoin.ECKey(privKey1);
-				var ecKey2 = new Bitcoin.ECKey(privKey2);
+				var ecKey1 = new Peercoin.ECKey(privKey1);
+				var ecKey2 = new Peercoin.ECKey(privKey2);
 				// if both keys are the same return null
-				if (ecKey1.getBitcoinHexFormat() == ecKey2.getBitcoinHexFormat()) return null;
+				if (ecKey1.getPeercoinHexFormat() == ecKey2.getPeercoinHexFormat()) return null;
 				if (ecKey1 == null || ecKey2 == null) return null;
-				var combinedPrivateKey = new Bitcoin.ECKey(ecKey1.priv.add(ecKey2.priv).mod(n));
+				var combinedPrivateKey = new Peercoin.ECKey(ecKey1.priv.add(ecKey2.priv).mod(n));
 				// compressed when both keys are compressed
 				if (ecKey1.compressed && ecKey2.compressed) combinedPrivateKey.setCompressed(true);
 				return combinedPrivateKey;
 			},
 			getECKeyFromMultiplying: function (privKey1, privKey2) {
 				var n = EllipticCurve.getSECCurveByName("secp256k1").getN();
-				var ecKey1 = new Bitcoin.ECKey(privKey1);
-				var ecKey2 = new Bitcoin.ECKey(privKey2);
+				var ecKey1 = new Peercoin.ECKey(privKey1);
+				var ecKey2 = new Peercoin.ECKey(privKey2);
 				// if both keys are the same return null
-				if (ecKey1.getBitcoinHexFormat() == ecKey2.getBitcoinHexFormat()) return null;
+				if (ecKey1.getPeercoinHexFormat() == ecKey2.getPeercoinHexFormat()) return null;
 				if (ecKey1 == null || ecKey2 == null) return null;
-				var combinedPrivateKey = new Bitcoin.ECKey(ecKey1.priv.multiply(ecKey2.priv).mod(n));
+				var combinedPrivateKey = new Peercoin.ECKey(ecKey1.priv.multiply(ecKey2.priv).mod(n));
 				// compressed when both keys are compressed
 				if (ecKey1.compressed && ecKey2.compressed) combinedPrivateKey.setCompressed(true);
 				return combinedPrivateKey;
@@ -4948,9 +4947,9 @@
 				key = key.toString();
 				return /^0[2-3][A-Fa-f0-9]{64}$/.test(key);
 			},
-			getBitcoinAddressFromByteArray: function (pubKeyByteArray) {
-				var pubKeyHash = Bitcoin.Util.sha256ripe160(pubKeyByteArray);
-				var addr = new Bitcoin.Address(pubKeyHash);
+			getPeercoinAddressFromByteArray: function (pubKeyByteArray) {
+				var pubKeyHash = Peercoin.Util.sha256ripe160(pubKeyByteArray);
+				var addr = new Peercoin.Address(pubKeyHash);
 				return addr.toString();
 			},
 			getHexFromByteArray: function (pubKeyByteArray) {
@@ -5181,16 +5180,16 @@
 				"en": {
 					// javascript alerts or messages
 					"testneteditionactivated": "TESTNET EDITION ACTIVATED",
-					"paperlabelbitcoinaddress": "Bitcoin Address:",
+					"paperlabelpeercoinaddress": "Peercoin Address:",
 					"paperlabelprivatekey": "Private Key (Wallet Import Format):",
 					"bulkgeneratingaddresses": "Generating addresses... ",
-					"brainalertpassphrasetooshort": "The passphrase you entered is too short.\n\nWarning: Choosing a strong passphrase is important to avoid brute force attempts to guess your passphrase and steal your bitcoins.",
+					"brainalertpassphrasetooshort": "The passphrase you entered is too short.\n\nWarning: Choosing a strong passphrase is important to avoid brute force attempts to guess your passphrase and steal your peercoins.",
 					"brainalertpassphrasedoesnotmatch": "The passphrase does not match the confirm passphrase.",
 					"detailalertnotvalidprivatekey": "The text you entered is not a valid Private Key",
-					"detailconfirmsha256": "The text you entered is not a valid Private Key!\n\nWould you like to use the entered text as a passphrase and create a Private Key using a SHA256 hash of the passphrase?\n\nWarning: Choosing a strong passphrase is important to avoid brute force attempts to guess your passphrase and steal your bitcoins.",
+					"detailconfirmsha256": "The text you entered is not a valid Private Key!\n\nWould you like to use the entered text as a passphrase and create a Private Key using a SHA256 hash of the passphrase?\n\nWarning: Choosing a strong passphrase is important to avoid brute force attempts to guess your passphrase and steal your peercoins.",
 					"vanityinvalidinputcouldnotcombinekeys": "Invalid input. Could not combine keys.",
 					"vanityalertinvalidinputpublickeysmatch": "Invalid input. The Public Key of both entries match. You must input two different keys.",
-					"vanityalertinvalidinputcannotmultiple": "Invalid input. Cannot multiply two public keys. Select 'Add' to add two public keys to get a bitcoin address.",
+					"vanityalertinvalidinputcannotmultiple": "Invalid input. Cannot multiply two public keys. Select 'Add' to add two public keys to get a peercoin address.",
 					"vanityprivatekeyonlyavailable": "Only available when combining two private keys",
 					"vanityalertinvalidinputprivatekeysmatch": "Invalid input. The Private Key of both entries match. You must input two different keys."
 				},
@@ -5198,23 +5197,23 @@
 				"es": {
 					// javascript alerts or messages
 					"testneteditionactivated": "Testnet se activa",
-					"paperlabelbitcoinaddress": "Direcci�n Bitcoin:",
+					"paperlabelpeercoinaddress": "Direcci󮠐eercoin:",
 					"paperlabelprivatekey": "Clave privada (formato para importar):",
-					"bulkgeneratingaddresses": "Generaci�n de direcciones... ",
-					"brainalertpassphrasetooshort": "La contrase�a introducida es demasiado corta.\n\nAviso: Es importante escoger una contrase�a fuerte para evitar ataques de fuerza bruta a fin de adivinarla y robar tus bitcoins.",
-					"brainalertpassphrasedoesnotmatch": "Las contrase�as no coinciden.",
-					"detailalertnotvalidprivatekey": "El texto que has introducido no es una clave privada v�lida",
-					"detailconfirmsha256": "El texto que has introducido no es una clave privada v�lida\n\n�Quieres usar ese texto como si fuera una contrase�a y generar una clave privada usando un hash SHA256 de tal contrase�a?\n\nAviso: Es importante escoger una contrase�a fuerte para evitar ataques de fuerza bruta a fin de adivinarla y robar tus bitcoins.",
-					"vanityinvalidinputcouldnotcombinekeys": "Entrada no v�lida. No se puede combinar llaves.",
-					"vanityalertinvalidinputpublickeysmatch": "Entrada no v�lida. La clave p�blica de ambos coincidan entradas. Debe introducir dos claves diferentes.",
-					"vanityalertinvalidinputcannotmultiple": "Entrada no v�lida. No se puede multiplicar dos claves p�blicas. Seleccione 'A�adir' para agregar dos claves p�blicas para obtener una direcci�n bitcoin.",
-					"vanityprivatekeyonlyavailable": "S�lo est� disponible cuando se combinan dos claves privadas",
-					"vanityalertinvalidinputprivatekeysmatch": "Entrada no v�lida. La clave privada de ambos coincidan entradas. Debe introducir dos claves diferentes.",
+					"bulkgeneratingaddresses": "Generaci󮠤e direcciones... ",
+					"brainalertpassphrasetooshort": "La contrase񡠩ntroducida es demasiado corta.\n\nAviso: Es importante escoger una contrase񡠦uerte para evitar ataques de fuerza bruta a fin de adivinarla y robar tus peercoins.",
+					"brainalertpassphrasedoesnotmatch": "Las contrase񡳠no coinciden.",
+					"detailalertnotvalidprivatekey": "El texto que has introducido no es una clave privada v⭩da",
+					"detailconfirmsha256": "El texto que has introducido no es una clave privada v⭩da\n\nࠑuieres usar ese texto como si fuera una contrase񡠹 generar una clave privada usando un hash SHA256 de tal contrase񡿜n\nAviso: Es importante escoger una contrase񡠦uerte para evitar ataques de fuerza bruta a fin de adivinarla y robar tus peercoins.",
+					"vanityinvalidinputcouldnotcombinekeys": "Entrada no v⭩da. No se puede combinar llaves.",
+					"vanityalertinvalidinputpublickeysmatch": "Entrada no v⭩da. La clave p򢬩ca de ambos coincidan entradas. Debe introducir dos claves diferentes.",
+					"vanityalertinvalidinputcannotmultiple": "Entrada no v⭩da. No se puede multiplicar dos claves p򢬩cas. Seleccione 'A񡤩r' para agregar dos claves p򢬩cas para obtener una direcci󮠰eercoin.",
+					"vanityprivatekeyonlyavailable": "S󬯠estᡤisponible cuando se combinan dos claves privadas",
+					"vanityalertinvalidinputprivatekeysmatch": "Entrada no v⭩da. La clave privada de ambos coincidan entradas. Debe introducir dos claves diferentes.",
 
 					// header and menu html
-					"tagline": "Generador de carteras Bitcoin de c�digo abierto en lado de cliente con Javascript",
-					"generatelabelbitcoinaddress": "Generando direcci�n Bitcoin...",
-					"generatelabelmovemouse": "Mueve un poco el rat�n para crear entrop�a...",
+					"tagline": "Generador de carteras Peercoin de c󤩧o abierto en lado de cliente con Javascript",
+					"generatelabelpeercoinaddress": "Generando direcci󮠐eercoin...",
+					"generatelabelmovemouse": "Mueve un poco el rat󮠰ara crear entrop..",
 					"singlewallet": "Una sola cartera",
 					"paperwallet": "Cartera en papel",
 					"bulkwallet": "Direcciones en masa",
@@ -5224,23 +5223,23 @@
 
 					// footer html
 					"footerlabeldonations": "Donaciones:",
-					"footerlabeltranslatedby": "Traducci�n: <b>12345</b>Vypv2QSmuRXcciT5oEB27mPbWGeva",
-					"footerlabelpgp": "Clave p�blica PGP",
-					"footerlabelversion": "Hist�rico de versiones",
+					"footerlabeltranslatedby": "Traducci󮺠<b>12345</b>Vypv2QSmuRXcciT5oEB27mPbWGeva",
+					"footerlabelpgp": "Clave p򢬩ca PGP",
+					"footerlabelversion": "Hist󲩣o de versiones",
 					"footerlabelgithub": "Repositorio GitHub",
-					"footerlabelcopyright1": "Copyright bitaddress.org.",
-					"footerlabelcopyright2": "Copyright del c�digo JavaScript: en el fuente.",
-					"footerlabelnowarranty": "Sin garant�a.",
+					"footerlabelcopyright1": "Copyright wallet.peercontalk.org.",
+					"footerlabelcopyright2": "Copyright del c󤩧o JavaScript: en el fuente.",
+					"footerlabelnowarranty": "Sin garant",
 
 					// single wallet html
-					"newaddress": "Generar direcci�n",
+					"newaddress": "Generar direcci󮢬
 					"singleprint": "Imprimir",
-					"singlelabelbitcoinaddress": "Direcci�n Bitcoin",
+					"singlelabelpeercoinaddress": "Direcci󮠐eercoin",
 					"singlelabelprivatekey": "Clave privada (formato para importar):",
 
 					// paper wallet html
-					"paperlabelhideart": "Ocultar dise�o",
-					"paperlabeladdressesperpage": "Direcciones por p�gina:",
+					"paperlabelhideart": "Ocultar dise񯢬
+					"paperlabeladdressesperpage": "Direcciones por p⨩na:",
 					"paperlabeladdressestogenerate": "Direcciones en total:",
 					"papergenerate": "Generar",
 					"paperprint": "Imprimir",
@@ -5251,45 +5250,45 @@
 					"bulkgenerate": "Generar",
 					"bulkprint": "Imprimir",
 					"bulklabelcsv": "Valores separados por coma:",
-					"bulklabelformat": "�ndice,Direcci�n,Clave privada (formato para importar)",
-					"bulklabelq1": "�Por qu� debo usar \"Direcciones en masa\" para aceptar Bitcoins en mi web?",
-					"bulka1": "La forma tradicional de aceptar bitcoins en tu web requiere tener instalado el cliente oficial de bitcoin (\"bitcoind\"). Sin embargo muchos servicios de hosting no permiten instalar dicho cliente. Adem�s, ejecutar el cliente en tu servidor supone que las claves privadas est�n tambi�n en el servidor y podr�an ser comprometidas en caso de intrusi�n. Al usar este mecanismo, puedes subir al servidor s�lo las direcci�n de bitcoin y no las claves privadas. De esta forma no te tienes que preocupar de que alguien robe la cartera si se cuelan en el servidor.",
-					"bulklabelq2": "�C�mo uso \"Direcciones en masa\" para aceptar bitcoins en mi web?",
-					"bulklabela2li1": "Usa el tab \"Direcciones en masa\" para generar por anticipado muchas direcciones (m�s de 10000). Copia y pega la lista de valores separados por comas (CSV) a un archivo de texto seguro (cifrado) en tu ordenador. Guarda una copia de seguridad en alg�n lugar seguro.",
-					"bulklabela2li2": "Importa las direcciones en la base de datos de tu servidor. No subas la cartera ni las claves p�blicas, o de lo contrario te lo pueden robar. Sube s�lo las direcciones, ya que es lo que se va a mostrar a los clientes.",
-					"bulklabela2li3": "Ofrece una alternativa en el carro de la compra de tu web para que los clientes paguen con Bitcoin. Cuando el cliente elija pagar con Bitcoin, les muestras una de las direcciones de la base de datos como su \"direcci�n de pago\" y guardas esto junto con el pedido.",
-					"bulklabela2li4": "Ahora te hace falta recibir una notificaci�n del pago. Busca en google \"notificaci�n de pagos bitcoin\" (o \"bitcoin payment notification\" en ingl�s) y suscr�bete a alguno de los servicios que aparezcan. Hay varios de ellos, que te pueden notificar v�a Web services, API, SMS, email, etc. Una vez te llegue la notificaci�n, lo cual puede ser automatizado, entonces ya puedes procesar el pedido. Para comprobar a mano si has recibido un pago, puedes usar Block Explorer: reemplaza DIRECCION a continuaci�n por la direcci�n que est�s comprobando. La transacci�n puede tardar entre 10 minutos y una hora en ser confirmada. <br />http://www.blockexplorer.com/address/DIRECCION<br /><br />Puedes ver las transacciones sin confirmar en: http://blockchain.info/ <br />Las transacciones sin confirmar suelen aparecer ah� en unos 30 segundos.",
-					"bulklabela2li5": "Las bitcoins que recibas se almacenar�n de forma segura en la cadena de bloques. Usa la cartera original que generaste en el paso 1 para usarlas.",
+					"bulklabelformat": "ήdice,Direcci󮬃lave privada (formato para importar)",
+					"bulklabelq1": "ࠐor qu顤ebo usar \"Direcciones en masa\" para aceptar Peercoins en mi web?",
+					"bulka1": "La forma tradicional de aceptar peercoins en tu web requiere tener instalado el cliente oficial de peercoin (\"ppcoind\"). Sin embargo muchos servicios de hosting no permiten instalar dicho cliente. Ademⳬ ejecutar el cliente en tu servidor supone que las claves privadas est⮠tambiꮠen el servidor y podr ser comprometidas en caso de intrusi󮮠Al usar este mecanismo, puedes subir al servidor s󬯠las direcci󮠤e peercoin y no las claves privadas. De esta forma no te tienes que preocupar de que alguien robe la cartera si se cuelan en el servidor.",
+					"bulklabelq2": "ࠃ󭯠uso \"Direcciones en masa\" para aceptar peercoins en mi web?",
+					"bulklabela2li1": "Usa el tab \"Direcciones en masa\" para generar por anticipado muchas direcciones (mⳠde 10000). Copia y pega la lista de valores separados por comas (CSV) a un archivo de texto seguro (cifrado) en tu ordenador. Guarda una copia de seguridad en alg򮠬ugar seguro.",
+					"bulklabela2li2": "Importa las direcciones en la base de datos de tu servidor. No subas la cartera ni las claves p򢬩cas, o de lo contrario te lo pueden robar. Sube s󬯠las direcciones, ya que es lo que se va a mostrar a los clientes.",
+					"bulklabela2li3": "Ofrece una alternativa en el carro de la compra de tu web para que los clientes paguen con Peercoin. Cuando el cliente elija pagar con Peercoin, les muestras una de las direcciones de la base de datos como su \"direcci󮠤e pago\" y guardas esto junto con el pedido.",
+					"bulklabela2li4": "Ahora te hace falta recibir una notificaci󮠤el pago. Busca en google \"notificaci󮠤e pagos peercoin\" (o \"peercoin payment notification\" en ingl곩 y suscrte a alguno de los servicios que aparezcan. Hay varios de ellos, que te pueden notificar vWeb services, API, SMS, email, etc. Una vez te llegue la notificaci󮬠lo cual puede ser automatizado, entonces ya puedes procesar el pedido. Para comprobar a mano si has recibido un pago, puedes usar Block Explorer: reemplaza DIRECCION a continuaci󮠰or la direcci󮠱ue est고comprobando. La transacci󮠰uede tardar entre 10 minutos y una hora en ser confirmada. <br />http://www.blockexplorer.com/address/DIRECCION<br /><br />Puedes ver las transacciones sin confirmar en: http://blockchain.info/ <br />Las transacciones sin confirmar suelen aparecer ah�n unos 30 segundos.",
+					"bulklabela2li5": "Las peercoins que recibas se almacenar⮠de forma segura en la cadena de bloques. Usa la cartera original que generaste en el paso 1 para usarlas.",
 
 					// brain wallet html
-					"brainlabelenterpassphrase": "Contrase�a:",
+					"brainlabelenterpassphrase": "Contrase񡺢,
 					"brainlabelshow": "Mostrar",
 					"brainprint": "Imprimir",
-					"brainlabelconfirm": "Confirmar contrase�a:",
+					"brainlabelconfirm": "Confirmar contrase񡺢,
 					"brainview": "Ver",
-					"brainalgorithm": "Algoritmo: SHA256(contrase�a)",
-					"brainlabelbitcoinaddress": "Direcci�n Bitcoin:",
+					"brainalgorithm": "Algoritmo: SHA256(contrase񡩢,
+					"brainlabelpeercoinaddress": "Direcci󮠐eercoin:",
 					"brainlabelprivatekey": "Clave privada (formato para importar):",
 
 					// vanity wallet html
 					"vanitylabelstep1": "Paso 1 - Genera tu par de claves",
 					"vanitynewkeypair": "Generar",
-					"vanitylabelstep1publickey": "Clave p�blica:",
-					"vanitylabelstep1pubnotes": "Copia y pega la l�nea de arriba en el campo \"Your-Part-Public-Key\" de la web de Vanity Pool.",
+					"vanitylabelstep1publickey": "Clave p򢬩ca:",
+					"vanitylabelstep1pubnotes": "Copia y pega la la de arriba en el campo \"Your-Part-Public-Key\" de la web de Vanity Pool.",
 					"vanitylabelstep1privatekey": "Clave privada:",
-					"vanitylabelstep1privnotes": "Copia y pega la clave p�blica de arriba en un archivo de texto. Es mejor que lo almacenes en un volumen cifrado. Lo necesitar�s para recuperar la clave privada una vez Vanity Pool haya encontrado tu prefijo.",
+					"vanitylabelstep1privnotes": "Copia y pega la clave p򢬩ca de arriba en un archivo de texto. Es mejor que lo almacenes en un volumen cifrado. Lo necesitarⳠpara recuperar la clave privada una vez Vanity Pool haya encontrado tu prefijo.",
 					"vanitylabelstep2calculateyourvanitywallet": "Paso 2 - Calcula tu cartera personalizada",
 					"vanitylabelenteryourpart": "Introduce la clave privada generada en el paso 1, y que has guardado:",
 					"vanitylabelenteryourpoolpart": "Introduce la clave privada obtenida de la Vanity Pool:",
-					"vanitylabelnote1": "[NOTA: esta casilla de entrada puede aceptar una clave p�blica o clave privada]",
-					"vanitylabelnote2": "[NOTA: esta casilla de entrada puede aceptar una clave p�blica o clave privada]",
-					"vanitylabelradioadd": "A�adir",
+					"vanitylabelnote1": "[NOTA: esta casilla de entrada puede aceptar una clave p򢬩ca o clave privada]",
+					"vanitylabelnote2": "[NOTA: esta casilla de entrada puede aceptar una clave p򢬩ca o clave privada]",
+					"vanitylabelradioadd": "A񡤩r",
 					"vanitylabelradiomultiply": "Multiplicar", 
 					"vanitycalc": "Calcular cartera personalizada",
-					"vanitylabelbitcoinaddress": "Direcci�n Bitcoin personalizada:",
-					"vanitylabelnotesbitcoinaddress": "Esta es tu nueva direcci�n, que deber�a tener el prefijo deseado.",
-					"vanitylabelpublickeyhex": "Clave p�blica personalizada (HEX):", 
-					"vanitylabelnotespublickeyhex": "Lo anterior es la clave p�blica en formato hexadecimal.", 
+					"vanitylabelpeercoinaddress": "Direcci󮠐eercoin personalizada:",
+					"vanitylabelnotespeercoinaddress": "Esta es tu nueva direcci󮬠que debertener el prefijo deseado.",
+					"vanitylabelpublickeyhex": "Clave p򢬩ca personalizada (HEX):", 
+					"vanitylabelnotespublickeyhex": "Lo anterior es la clave p򢬩ca en formato hexadecimal.", 
 					"vanitylabelprivatekey": "Clave privada personalizada (formato para importar):",
 					"vanitylabelnotesprivatekey": "Esto es la clave privada para introducir en tu cartera.",
 
@@ -5297,12 +5296,12 @@
 					"detaillabelenterprivatekey": "Introduce la clave privada (en cualquier formato)",
 					"detailview": "Ver detalles",
 					"detailprint": "Imprimir",
-					"detaillabelnote1": "Tu clave privada es un n�mero secreto, �nico, que s�lo t� conoces. Se puede expresar en varios formatos. Aqu� abajo mostramos la direcci�n y la clave p�blica que se corresponden con tu clave privada, as� como la clave privada en los formatos m�s conocidos (para importar, hex, base64 y mini).",
-					"detaillabelnote2": "Bitcoin v0.6+ almacena las claves p�blicas comprimidas. El cliente tambi�n soporta importar/exportar claves privadas usando importprivkey/dumpprivkey. El formato de las claves privadas exportadas depende de si la direcci�n se gener� en una cartera antigua o nueva.",
-					"detaillabelbitcoinaddress": "Direcci�n Bitcoin:",
-					"detaillabelbitcoinaddresscomp": "Direcci�n Bitcoin (comprimida):",
-					"detaillabelpublickey": "Clave p�blica (130 caracteres [0-9A-F]):",
-					"detaillabelpublickeycomp": "Clave p�blica (comprimida, 66 caracteres [0-9A-F]):",
+					"detaillabelnote1": "Tu clave privada es un n򭥲o secreto, 򮩣o, que s󬯠t򠣯noces. Se puede expresar en varios formatos. Aqu�bajo mostramos la direcci󮠹 la clave p򢬩ca que se corresponden con tu clave privada, as�omo la clave privada en los formatos mⳠconocidos (para importar, hex, base64 y mini).",
+					"detaillabelnote2": "Peercoin v0.3+ almacena las claves p򢬩cas comprimidas. El cliente tambiꮠsoporta importar/exportar claves privadas usando importprivkey/dumpprivkey. El formato de las claves privadas exportadas depende de si la direcci󮠳e gener󠥮 una cartera antigua o nueva.",
+					"detaillabelpeercoinaddress": "Direcci󮠐eercoin:",
+					"detaillabelpeercoinaddresscomp": "Direcci󮠐eercoin (comprimida):",
+					"detaillabelpublickey": "Clave p򢬩ca (130 caracteres [0-9A-F]):",
+					"detaillabelpublickeycomp": "Clave p򢬩ca (comprimida, 66 caracteres [0-9A-F]):",
 					"detaillabelprivwif": "Clave privada para importar (51 caracteres en base58, empieza con un",
 					"detaillabelprivwifcomp": "Clave privada para importar (comprimida, 52 caracteres en base58, empieza con",
 					"detailcompwifprefix": "'K' o 'L'",
@@ -5312,102 +5311,102 @@
 				},
 
 				"fr": {
-					"testneteditionactivated": "�DITION TESTNET ACTIV�E",
-					"paperlabelbitcoinaddress": "Adresse Bitcoin:",
-					"paperlabelprivatekey": "Cl� Priv�e (Format d'importation de porte-monnaie):",
-					"bulkgeneratingaddresses": "Cr�ation de l'adresse... ",
-					"brainalertpassphrasetooshort": "Le mot de passe que vous avez entr� est trop court.\n\nAttention: Choisir un mot de passe solide est important pour vous prot�ger des attaques bruteforce visant � trouver votre mot de passe et voler vos Bitcoins.",
-					"brainalertpassphrasedoesnotmatch": "Le mot de passe ne correspond pas au mot de passe de v�rification.",
-					"detailalertnotvalidprivatekey": "Le texte que vous avez entr� n'est pas une Cl� Priv�e valide",
-					"detailconfirmsha256": "Le texte que vous avez entr� n'est pas une Cl� Priv�e valide!\n\nVoulez-vous utiliser le texte comme un mot de passe et cr�er une Cl� Priv�e � partir d'un hash SHA256 de ce mot de passe?\n\nAttention: Choisir un mot de passe solide est important pour vous prot�ger des attaques bruteforce visant � trouver votre mot de passe et voler vos Bitcoins.",
-					"vanityinvalidinputcouldnotcombinekeys": "Entr�e non valide. Impossible de combiner les cl�s.",
-					"vanityalertinvalidinputpublickeysmatch": "Entr�e non valide. La cl� publique des deux entr�es est identique. Vous devez entrer deux cl�s diff�rentes.",
-					"vanityalertinvalidinputcannotmultiple": "Entr�e non valide. Il n'est pas possible de multiplier deux cl�s publiques. S�lectionner 'Ajouter' pour ajouter deux cl�s publiques pour obtenir une adresse Bitcoin.",
-					"vanityprivatekeyonlyavailable": "Seulement disponible si vos combinez deux cl�s priv�es",
-					"vanityalertinvalidinputprivatekeysmatch": "Entr�e non valide. La cl� Priv�e des deux entr�es est identique. Vous devez entrer deux cl�s diff�rentes.",
-					"tagline": "G�n�rateur De Porte-Monnaie Bitcoin Javascript Hors-Ligne",
-					"generatelabelbitcoinaddress": "Cr�ation de l'adresse Bitcoin...",
+					"testneteditionactivated": "ʄITION TESTNET ACTIVʅ",
+					"paperlabelpeercoinaddress": "Adresse Peercoin:",
+					"paperlabelprivatekey": "Cl顐rivꥠ(Format d'importation de porte-monnaie):",
+					"bulkgeneratingaddresses": "Crꢴion de l'adresse... ",
+					"brainalertpassphrasetooshort": "Le mot de passe que vous avez entr顥st trop court.\n\nAttention: Choisir un mot de passe solide est important pour vous protꨥr des attaques bruteforce visant ࡴrouver votre mot de passe et voler vos Peercoins.",
+					"brainalertpassphrasedoesnotmatch": "Le mot de passe ne correspond pas au mot de passe de v곩fication.",
+					"detailalertnotvalidprivatekey": "Le texte que vous avez entr顮'est pas une Cl顐rivꥠvalide",
+					"detailconfirmsha256": "Le texte que vous avez entr顮'est pas une Cl顐rivꥠvalide!\n\nVoulez-vous utiliser le texte comme un mot de passe et crꦲ une Cl顐rivꥠࡰartir d'un hash SHA256 de ce mot de passe?\n\nAttention: Choisir un mot de passe solide est important pour vous protꨥr des attaques bruteforce visant ࡴrouver votre mot de passe et voler vos Peercoins.",
+					"vanityinvalidinputcouldnotcombinekeys": "Entrꥠnon valide. Impossible de combiner les cl곮",
+					"vanityalertinvalidinputpublickeysmatch": "Entrꥠnon valide. La cl顰ublique des deux entr꦳ est identique. Vous devez entrer deux cl고diff곥ntes.",
+					"vanityalertinvalidinputcannotmultiple": "Entrꥠnon valide. Il n'est pas possible de multiplier deux cl고publiques. Sꭥctionner 'Ajouter' pour ajouter deux cl고publiques pour obtenir une adresse Peercoin.",
+					"vanityprivatekeyonlyavailable": "Seulement disponible si vos combinez deux cl고priv꦳",
+					"vanityalertinvalidinputprivatekeysmatch": "Entrꥠnon valide. La cl顐rivꥠdes deux entr꦳ est identique. Vous devez entrer deux cl고diff곥ntes.",
+					"tagline": "Gꯩrateur De Porte-Monnaie Peercoin Javascript Hors-Ligne",
+					"generatelabelpeercoinaddress": "Crꢴion de l'adresse Peercoin...",
 					"generatelabelmovemouse": "BOUGEZ votre souris pour ajouter de l'entropie...",
 					"singlewallet": "Porte-Monnaie Simple",
 					"paperwallet": "Porte-Monnaie Papier",
 					"bulkwallet": "Porte-Monnaie En Vrac",
 					"brainwallet": "Porte-Monnaie Cerveau",
-					"vanitywallet": "Porte-Monnaie Vanit�",
-					"detailwallet": "D�tails du Porte-Monnaie",
+					"vanitywallet": "Porte-Monnaie Vanit颬
+					"detailwallet": "D굡ils du Porte-Monnaie",
 					"footerlabeldonations": "Dons:",
 					"footerlabeltranslatedby": "Traduction: 1Gy7NYSJNUYqUdXTBow5d7bCUEJkUFDFSq",
-					"footerlabelpgp": "Cl� Publique PGP",
-					"footerlabelversion": "Historique De Version Sign�",
-					"footerlabelgithub": "D�p�t GitHub",
-					"footerlabelcopyright1": "Copyright bitaddress.org.",
+					"footerlabelpgp": "Cl顐ublique PGP",
+					"footerlabelversion": "Historique De Version Sign颬
+					"footerlabelgithub": "D건t GitHub",
+					"footerlabelcopyright1": "Copyright wallet.peercontalk.org.",
 					"footerlabelcopyright2": "Les droits d'auteurs JavaScript sont inclus dans le code source.",
 					"footerlabelnowarranty": "Aucune garantie.",
-					"newaddress": "G�n�rer Une Nouvelle Adresse",
+					"newaddress": "Gꯩrer Une Nouvelle Adresse",
 					"singleprint": "Imprimer",
-					"singlelabelbitcoinaddress": "Adresse Bitcoin:",
-					"singlelabelprivatekey": "Cl� Priv�e (Format d'importation de porte-monnaie):",
+					"singlelabelpeercoinaddress": "Adresse Peercoin:",
+					"singlelabelprivatekey": "Cl顐rivꥠ(Format d'importation de porte-monnaie):",
 					"paperlabelhideart": "Retirer Le Style?",
 					"paperlabeladdressesperpage": "Adresses par page:",
-					"paperlabeladdressestogenerate": "Nombre d'adresses � cr�er:",
-					"papergenerate": "G�n�rer",
+					"paperlabeladdressestogenerate": "Nombre d'adresses ࡣrꦲ:",
+					"papergenerate": "Gꯩrer",
 					"paperprint": "Imprimer",
-					"bulklabelstartindex": "Commencer � l'index:",
-					"bulklabelrowstogenerate": "Colonnes � g�n�rer:",
-					"bulkgenerate": "G�n�rer",
+					"bulklabelstartindex": "Commencer ࡬'index:",
+					"bulklabelrowstogenerate": "Colonnes ࡧꯩrer:",
+					"bulkgenerate": "Gꯩrer",
 					"bulkprint": "Imprimer",
-					"bulklabelcsv": "Valeurs S�par�es Par Des Virgules (CSV):",
-					"bulklabelformat": "Index,Adresse,Cl� Priv�e (WIF)",
-					"bulklabelq1": "Pourquoi utiliserais-je un Porte-monnaie en vrac pour accepter les Bitcoins sur mon site web?",
-					"bulka1": "L'approche traditionnelle pour accepter des Bitcoins sur votre site web requi�re l'installation du logiciel Bitcoin officiel (\"bitcoind\"). Plusieurs h�bergeurs ne supportent pas l'installation du logiciel Bitcoin. De plus, faire fonctionner le logiciel Bitcoin sur votre serveur web signifie que vos cl�s priv�es sont h�berg�es sur le serveur et pourraient donc �tre vol�es si votre serveur web �tait compromis. En utilisant un Porte-monnaie en vrac, vous pouvez publiquer seulement les adresses Bitcoin sur votre serveur et non les cl�s priv�es. Vous n'avez alors pas � vous inqui�ter du risque de vous faire voler votre porte-monnaie si votre serveur �tait compromis.",
-					"bulklabelq2": "Comment utiliser le Porte-monnaie en vrac pour utiliser le Bitcoin sur mon site web?",
-					"bulklabela2li1": "Utilisez le Porte-monnaie en vrac pour pr�-g�n�rer une large quantit� d'adresses Bitcoin (10,000+). Copiez collez les donn�es s�par�es par des virgules (CSV) dans un fichier texte s�curis� dans votre ordinateur. Sauvegardez ce fichier dans un endroit s�curis�.",
-					"bulklabela2li2": "Importez les adresses Bitcoin dans une base de donn�e sur votre serveur web. (N'ajoutez pas le porte-monnaie ou les cl�s priv�es sur votre serveur web, sinon vous courrez le risque de vous faire voler si votre serveur est compromis. Ajoutez seulement les adresses Bitcoin qui seront visibles � vos visiteurs.)",
-					"bulklabela2li3": "Ajoutez une option dans votre panier en ligne pour que vos clients puissent vous payer en Bitcoin. Quand un client choisi de vous payer en Bitcoin, vous pouvez afficher une des adresses de votre base de donn�e comme \"adresse de paiment\" pour votre client et sauvegarder cette adresse avec sa commande.",
-					"bulklabela2li4": "Vous avez maintenant besoin d'�tre avis� quand le paiement est re�u. Cherchez \"bitcoin payment notification\" sur Google et inscrivez-vous � un service de notification de paiement Bitcoin. Il y a plusieurs services qui vous avertiront via des services Web, API, SMS, Email, etc. Une fois que vous avez re�u la notification, qui devrait �tre programm�e automatiquement, vous pouvez traiter la commande de votre client. Pour v�rifier manuellement si un paiement est arriv�, vous pouvez utiliser Block Explorer. Remplacez ADRESSE par l'adresse Bitcoin que vous souhaitez v�rifier. La confirmation de la transaction pourrait prendre de 10 � 60 minutes pour �tre confirm�e.<br />http://www.blockexplorer.com/address/ADRESSE<br /><br />Les transactions non confirm�es peuvent �tre visualis�es ici: http://blockchain.info/ <br />Vous devriez voir la transaction � l'int�rieur de 30 secondes.",
-					"bulklabela2li5": "Les Bitcoins vos s'accumuler de fa�on s�curitaire dans la cha�ne de blocs. Utilisez le porte-monnaie original que vous avez g�n�r� � l'�tape 1 pour les d�penser.",
+					"bulklabelcsv": "Valeurs S걡r꦳ Par Des Virgules (CSV):",
+					"bulklabelformat": "Index,Adresse,Cl顐rivꥠ(WIF)",
+					"bulklabelq1": "Pourquoi utiliserais-je un Porte-monnaie en vrac pour accepter les Peercoins sur mon site web?",
+					"bulka1": "L'approche traditionnelle pour accepter des Peercoins sur votre site web requi鳥 l'installation du logiciel Peercoin officiel (\"ppcoind\"). Plusieurs h꣥rgeurs ne supportent pas l'installation du logiciel Peercoin. De plus, faire fonctionner le logiciel Peercoin sur votre serveur web signifie que vos cl고priv꦳ sont h꣥rg꦳ sur le serveur et pourraient donc 뵲e vol꦳ si votre serveur web 굡it compromis. En utilisant un Porte-monnaie en vrac, vous pouvez publiquer seulement les adresses Peercoin sur votre serveur et non les cl고priv꦳. Vous n'avez alors pas ࡶous inqui굥r du risque de vous faire voler votre porte-monnaie si votre serveur 굡it compromis.",
+					"bulklabelq2": "Comment utiliser le Porte-monnaie en vrac pour utiliser le Peercoin sur mon site web?",
+					"bulklabela2li1": "Utilisez le Porte-monnaie en vrac pour pr鮧ꯩrer une large quantit顤'adresses Peercoin (10,000+). Copiez collez les donn꦳ s걡r꦳ par des virgules (CSV) dans un fichier texte sꤵris顤ans votre ordinateur. Sauvegardez ce fichier dans un endroit sꤵris鮢,
+					"bulklabela2li2": "Importez les adresses Peercoin dans une base de donnꥠsur votre serveur web. (N'ajoutez pas le porte-monnaie ou les cl고priv꦳ sur votre serveur web, sinon vous courrez le risque de vous faire voler si votre serveur est compromis. Ajoutez seulement les adresses Peercoin qui seront visibles ࡶos visiteurs.)",
+					"bulklabela2li3": "Ajoutez une option dans votre panier en ligne pour que vos clients puissent vous payer en Peercoin. Quand un client choisi de vous payer en Peercoin, vous pouvez afficher une des adresses de votre base de donnꥠcomme \"adresse de paiment\" pour votre client et sauvegarder cette adresse avec sa commande.",
+					"bulklabela2li4": "Vous avez maintenant besoin d'뵲e avis顱uand le paiement est re赮 Cherchez \"peercoin payment notification\" sur Google et inscrivez-vous ࡵn service de notification de paiement Peercoin. Il y a plusieurs services qui vous avertiront via des services Web, API, SMS, Email, etc. Une fois que vous avez re赠la notification, qui devrait 뵲e programmꥠautomatiquement, vous pouvez traiter la commande de votre client. Pour v곩fier manuellement si un paiement est arriv鬠vous pouvez utiliser Block Explorer. Remplacez ADRESSE par l'adresse Peercoin que vous souhaitez v곩fier. La confirmation de la transaction pourrait prendre de 10 ࠶0 minutes pour 뵲e confirmꥮ<br />http://www.blockexplorer.com/address/ADRESSE<br /><br />Les transactions non confirm꦳ peuvent 뵲e visualis꦳ ici: http://blockchain.info/ <br />Vous devriez voir la transaction ࡬'int곩eur de 30 secondes.",
+					"bulklabela2li5": "Les Peercoins vos s'accumuler de fa谮 sꤵritaire dans la chaﯥ de blocs. Utilisez le porte-monnaie original que vous avez gꯩr顠 l'굡pe 1 pour les d걥nser.",
 					"brainlabelenterpassphrase": "Entrez votre mot de passe: ",
 					"brainlabelshow": "Afficher?",
 					"brainprint": "Imprimer",
 					"brainlabelconfirm": "Confirmer le mot de passe: ",
 					"brainview": "Visualiser",
 					"brainalgorithm": "Algorithme: SHA256(mot de passe)",
-					"brainlabelbitcoinaddress": "Adresse Bitcoin:",
-					"brainlabelprivatekey": "Cl� Priv�e (Format d'importation de porte-monnaie):",
-					"vanitylabelstep1": "�tape 1 - G�n�rer votre \"�tape 1 Paire De Cl�s\"",
-					"vanitynewkeypair": "G�n�rer",
-					"vanitylabelstep1publickey": "�tape 1 Cl� Publique:",
-					"vanitylabelstep1pubnotes": "Copiez celle-ci dans la case Votre-Cl�-Publique du site de Vanity Pool.",
-					"vanitylabelstep1privatekey": "Step 1 Cl� Priv�e:",
-					"vanitylabelstep1privnotes": "Copiez la cette Cl� Priv�e dans un fichier texte. Id�alement, sauvegardez la dans un fichier encrypt�. Vous en aurez besoin pour r�cup�rer la Cl� Priv�e lors que Vanity Pool aura trouv� votre pr�fixe.",
-					"vanitylabelstep2calculateyourvanitywallet": "�tape 2 - Calculer votre Porte-monnaie Vanit�",
-					"vanitylabelenteryourpart": "Entrez votre Cl� Priv�e (g�n�r�e � l'�tape 1 plus haut et pr�c�demment sauvegard�e):",
-					"vanitylabelenteryourpoolpart": "Entrez la Cl� Priv�e (provenant de Vanity Pool):",
-					"vanitylabelnote1": "[NOTE: cette case peut accepter une cl� publique ou un cl� priv�e]",
-					"vanitylabelnote2": "[NOTE: cette case peut accepter une cl� publique ou un cl� priv�e]",
+					"brainlabelpeercoinaddress": "Adresse Peercoin:",
+					"brainlabelprivatekey": "Cl顐rivꥠ(Format d'importation de porte-monnaie):",
+					"vanitylabelstep1": "ʴape 1 - Gꯩrer votre \"ʴape 1 Paire De Cl괜"",
+					"vanitynewkeypair": "Gꯩrer",
+					"vanitylabelstep1publickey": "ʴape 1 Cl顐ublique:",
+					"vanitylabelstep1pubnotes": "Copiez celle-ci dans la case Votre-Cl鮐ublique du site de Vanity Pool.",
+					"vanitylabelstep1privatekey": "Step 1 Cl顐rivꥺ",
+					"vanitylabelstep1privnotes": "Copiez la cette Cl顐rivꥠdans un fichier texte. Idꢬement, sauvegardez la dans un fichier encrypt鮠Vous en aurez besoin pour rꤵp곥r la Cl顐rivꥠlors que Vanity Pool aura trouv顶otre prꧩxe.",
+					"vanitylabelstep2calculateyourvanitywallet": "ʴape 2 - Calculer votre Porte-monnaie Vanit颬
+					"vanitylabelenteryourpart": "Entrez votre Cl顐rivꥠ(gꯩrꥠ࡬'굡pe 1 plus haut et prꤩdemment sauvegardꥩ:",
+					"vanitylabelenteryourpoolpart": "Entrez la Cl顐rivꥠ(provenant de Vanity Pool):",
+					"vanitylabelnote1": "[NOTE: cette case peut accepter une cl顰ublique ou un cl顰rivꦝ",
+					"vanitylabelnote2": "[NOTE: cette case peut accepter une cl顰ublique ou un cl顰rivꦝ",
 					"vanitylabelradioadd": "Ajouter",
 					"vanitylabelradiomultiply": "Multiplier",
-					"vanitycalc": "Calculer Le Porte-monnaie Vanit�",
-					"vanitylabelbitcoinaddress": "Adresse Bitcoin Vanit�:",
-					"vanitylabelnotesbitcoinaddress": "Ci-haut est votre nouvelle adresse qui devrait inclure le pr�fix requis.",
-					"vanitylabelpublickeyhex": "Cl� Public Vanit� (HEX):",
-					"vanitylabelnotespublickeyhex": "Celle-ci est la Cl� Publique dans le format hexad�cimal. ",
-					"vanitylabelprivatekey": "Cl� Priv�e Vanit� (WIF):",
-					"vanitylabelnotesprivatekey": "Celle-ci est la Cl� Priv�e pour acc�der � votre porte-monnaie. ",
-					"detaillabelenterprivatekey": "Entrez la Cl� Priv�e (quel que soit son format)",
-					"detailview": "Voir les d�tails",
+					"vanitycalc": "Calculer Le Porte-monnaie Vanit颬
+					"vanitylabelpeercoinaddress": "Adresse Peercoin Vanit麢,
+					"vanitylabelnotespeercoinaddress": "Ci-haut est votre nouvelle adresse qui devrait inclure le prꧩx requis.",
+					"vanitylabelpublickeyhex": "Cl顐ublic Vanit頨HEX):",
+					"vanitylabelnotespublickeyhex": "Celle-ci est la Cl顐ublique dans le format hexadꤩmal. ",
+					"vanitylabelprivatekey": "Cl顐rivꥠVanit頨WIF):",
+					"vanitylabelnotesprivatekey": "Celle-ci est la Cl顐rivꥠpour accꥥr ࡶotre porte-monnaie. ",
+					"detaillabelenterprivatekey": "Entrez la Cl顐rivꥠ(quel que soit son format)",
+					"detailview": "Voir les d굡ils",
 					"detailprint": "Imprimer",
-					"detaillabelnote1": "Votre Cl� Priv�e Bitcoin est un nombre secret que vous �tes le seul � conna�tre. Il peut �tre encod� sous la forme d'un nombre sous diff�rents formats. Ci-bas, nous affichons l'adresse Bitcoin et la Cl� Publique qui corresponds � la Cl� Priv�e ainsi que la Cl� Priv�e dans les formats d'encodage les plus populaires (WIF, HEX, B64, MINI).",
-					"detaillabelnote2": "Bitcoin v0.6+ conserve les cl�s publiques dans un format compress�. Le logiciel supporte maintenant aussi l'importation et l'exportation de cl�s priv�es avec importprivkey/dumpprivkey. Le format de la cl� priv�e export�e est d�termin� selon la version du porte-monnaie Bitcoin.",
-					"detaillabelbitcoinaddress": "Adresse Bitcoin:",
-					"detaillabelbitcoinaddresscomp": "Adresse Bitcoin (compress�e):",
-					"detaillabelpublickey": "Cl� Publique (130 caract�res [0-9A-F]):",
-					"detaillabelpublickeycomp": "Cl� Publique (compress�e, 66 caract�res [0-9A-F]):",
-					"detaillabelprivwif": "Cl� Priv�e WIF (51 caract�res base58, d�bute avec un a",
-					"detaillabelprivwifcomp": "Cl� Priv�e WIF (compress�e, 52 caract�res base58, d�bute avec un a",
+					"detaillabelnote1": "Votre Cl顐rivꥠPeercoin est un nombre secret que vous 뵥s le seul ࡣonnaﵲe. Il peut 뵲e encod顳ous la forme d'un nombre sous diff곥nts formats. Ci-bas, nous affichons l'adresse Peercoin et la Cl顐ublique qui corresponds ࡬a Cl顐rivꥠainsi que la Cl顐rivꥠdans les formats d'encodage les plus populaires (WIF, HEX, B64, MINI).",
+					"detaillabelnote2": "Peercoin v0.6+ conserve les cl고publiques dans un format compress鮠Le logiciel supporte maintenant aussi l'importation et l'exportation de cl고priv꦳ avec importprivkey/dumpprivkey. Le format de la cl顰rivꥠexportꥠest d굥rmin顳elon la version du porte-monnaie Peercoin.",
+					"detaillabelpeercoinaddress": "Adresse Peercoin:",
+					"detaillabelpeercoinaddresscomp": "Adresse Peercoin (compressꥩ:",
+					"detaillabelpublickey": "Cl顐ublique (130 caract鳥s [0-9A-F]):",
+					"detaillabelpublickeycomp": "Cl顐ublique (compressꥬ 66 caract鳥s [0-9A-F]):",
+					"detaillabelprivwif": "Cl顐rivꥠWIF (51 caract鳥s base58, dꣵte avec un a",
+					"detaillabelprivwifcomp": "Cl顐rivꥠWIF (compressꥬ 52 caract鳥s base58, dꣵte avec un a",
 					"detailcompwifprefix": "'K' ou 'L'",
-					"detaillabelprivhex": "Cl� Priv�e Format Hexadecimal (64 caract�res [0-9A-F]):",
-					"detaillabelprivb64": "Cl� Priv�e Base64 (44 caract�res):",
-					"detaillabelprivmini": "Cl� Priv�e Format Mini (22, 26 ou 30 caract�res, d�bute avec un 'S'):"
+					"detaillabelprivhex": "Cl顐rivꥠFormat Hexadecimal (64 caract鳥s [0-9A-F]):",
+					"detaillabelprivb64": "Cl顐rivꥠBase64 (44 caract鳥s):",
+					"detaillabelprivmini": "Cl顐rivꥠFormat Mini (22, 26 ou 30 caract鳥s, dꣵte avec un 'S'):"
 				}
 			}
 		};
@@ -5466,22 +5465,22 @@
 				document.getElementById("singlearea").style.display = "none";
 			},
 
-			// generate bitcoin address and private key and update information in the HTML
+			// generate peercoin address and private key and update information in the HTML
 			generateNewAddressAndKey: function () {
 				try {
-					var key = new Bitcoin.ECKey(false);
-					var bitcoinAddress = key.getBitcoinAddress();
-					var privateKeyWif = key.getBitcoinWalletImportFormat();
-					document.getElementById("btcaddress").innerHTML = bitcoinAddress;
+					var key = new Peercoin.ECKey(false);
+					var peercoinAddress = key.getPeercoinAddress();
+					var privateKeyWif = key.getPeercoinWalletImportFormat();
+					document.getElementById("btcaddress").innerHTML = peercoinAddress;
 					document.getElementById("btcprivwif").innerHTML = privateKeyWif;
 					var keyValuePair = {
-						"qrcode_public": bitcoinAddress,
+						"qrcode_public": peercoinAddress,
 						"qrcode_private": privateKeyWif
 					};
 					ninja.qrCode.showQrCode(keyValuePair);
 				}
 				catch (e) {
-					// browser does not have sufficient JavaScript support to generate a bitcoin address
+					// browser does not have sufficient JavaScript support to generate a peercoin address
 					alert(e);
 					document.getElementById("btcaddress").innerHTML = "error";
 					document.getElementById("btcprivwif").innerHTML = "error";
@@ -5569,17 +5568,17 @@
 				}
 			},
 
-			// generate bitcoin address, private key, QR Code and update information in the HTML
+			// generate peercoin address, private key, QR Code and update information in the HTML
 			// idPostFix: 1, 2, 3, etc.
 			generateNewWallet: function (idPostFix) {
-				var key = new Bitcoin.ECKey(false);
-				var bitcoinAddress = key.getBitcoinAddress();
-				var privateKeyWif = key.getBitcoinWalletImportFormat();
+				var key = new Peercoin.ECKey(false);
+				var peercoinAddress = key.getPeercoinAddress();
+				var privateKeyWif = key.getPeercoinWalletImportFormat();
 				if (ninja.wallets.paperwallet.useArtisticWallet) {
-					ninja.wallets.paperwallet.showArtisticWallet(idPostFix, bitcoinAddress, privateKeyWif);
+					ninja.wallets.paperwallet.showArtisticWallet(idPostFix, peercoinAddress, privateKeyWif);
 				}
 				else {
-					ninja.wallets.paperwallet.showWallet(idPostFix, bitcoinAddress, privateKeyWif);
+					ninja.wallets.paperwallet.showWallet(idPostFix, peercoinAddress, privateKeyWif);
 				}
 			},
 
@@ -5588,7 +5587,7 @@
 							"<div class='public'>" +
 								"<div id='qrcode_public" + i + "' class='qrcode_public'></div>" +
 								"<div class='pubaddress'>" +
-									"<span class='label'>" + ninja.translator.get("paperlabelbitcoinaddress") + "</span>" +
+									"<span class='label'>" + ninja.translator.get("paperlabelpeercoinaddress") + "</span>" +
 									"<span class='output' id='btcaddress" + i + "'></span>" +
 								"</div>" +
 							"</div>" +
@@ -5602,11 +5601,11 @@
 				return walletHtml;
 			},
 
-			showWallet: function (idPostFix, bitcoinAddress, privateKeyWif) {
-				document.getElementById("btcaddress" + idPostFix).innerHTML = bitcoinAddress;
+			showWallet: function (idPostFix, peercoinAddress, privateKeyWif) {
+				document.getElementById("btcaddress" + idPostFix).innerHTML = peercoinAddress;
 				document.getElementById("btcprivwif" + idPostFix).innerHTML = privateKeyWif;
 				var keyValuePair = {};
-				keyValuePair["qrcode_public" + idPostFix] = bitcoinAddress;
+				keyValuePair["qrcode_public" + idPostFix] = peercoinAddress;
 				keyValuePair["qrcode_private" + idPostFix] = privateKeyWif;
 				ninja.qrCode.showQrCode(keyValuePair);
 				document.getElementById("keyarea" + idPostFix).style.display = "block";
@@ -5625,12 +5624,12 @@
 				return walletHtml;
 			},
 
-			showArtisticWallet: function (idPostFix, bitcoinAddress, privateKeyWif) {
+			showArtisticWallet: function (idPostFix, peercoinAddress, privateKeyWif) {
 				var keyValuePair = {};
-				keyValuePair["qrcode_public" + idPostFix] = bitcoinAddress;
+				keyValuePair["qrcode_public" + idPostFix] = peercoinAddress;
 				keyValuePair["qrcode_private" + idPostFix] = privateKeyWif;
 				ninja.qrCode.showQrCode(keyValuePair, 2.5);
-				document.getElementById("btcaddress" + idPostFix).innerHTML = bitcoinAddress;
+				document.getElementById("btcaddress" + idPostFix).innerHTML = peercoinAddress;
 				document.getElementById("btcprivwif" + idPostFix).innerHTML = privateKeyWif;
 
 				// CODE to modify SVG DOM elements
@@ -5638,10 +5637,10 @@
 				//if (paperSvg) {
 				//	svgDoc = paperSvg.contentDocument;
 				//	if (svgDoc) {
-				//		var bitcoinAddressElement = svgDoc.getElementById("bitcoinaddress");
+				//		var peercoinAddressElement = svgDoc.getElementById("peercoinaddress");
 				//		var privateKeyElement = svgDoc.getElementById("privatekey");
-				//		if (bitcoinAddressElement && privateKeyElement) {
-				//			bitcoinAddressElement.textContent = bitcoinAddress;
+				//		if (peercoinAddressElement && privateKeyElement) {
+				//			peercoinAddressElement.textContent = peercoinAddress;
 				//			privateKeyElement.textContent = privateKeyWif;
 				//		}
 				//	}
@@ -5679,10 +5678,10 @@
 			},
 
 			// use this function to bulk generate addresses
-			// rowLimit: number of Bitcoin Addresses to generate
+			// rowLimit: number of Peercoin Addresses to generate
 			// startIndex: add this number to the row index for output purposes
 			// returns:
-			// index,bitcoinAddress,privateKeyWif
+			// index,peercoinAddress,privateKeyWif
 			buildCSV: function (rowLimit, startIndex) {
 				var bulkWallet = ninja.wallets.bulkwallet;
 				document.getElementById("bulktextarea").value = ninja.translator.get("bulkgeneratingaddresses") + rowLimit;
@@ -5702,12 +5701,12 @@
 				var bulkWallet = ninja.wallets.bulkwallet;
 				if (bulkWallet.csvRowsRemaining > 0) {
 					bulkWallet.csvRowsRemaining--;
-					var key = new Bitcoin.ECKey(false);
+					var key = new Peercoin.ECKey(false);
 
 					bulkWallet.csv.push((bulkWallet.csvRowLimit - bulkWallet.csvRowsRemaining + bulkWallet.csvStartIndex)
-								+ ",\"" + key.getBitcoinAddress() + "\",\"" + key.toString("wif")
+								+ ",\"" + key.getPeercoinAddress() + "\",\"" + key.toString("wif")
 					//+	"\",\"" + key.toString("wifcomp")    // uncomment these lines to add different private key formats to the CSV
-					//+ "\",\"" + key.getBitcoinHexFormat() 
+					//+ "\",\"" + key.getPeercoinHexFormat() 
 					//+ "\",\"" + key.toString("base64") 
 								+ "\"");
 
@@ -5760,13 +5759,13 @@
 					// enforce a minimum passphrase length
 					if (key.length >= ninja.wallets.brainwallet.minPassphraseLength) {
 						var bytes = Crypto.SHA256(key, { asBytes: true });
-						var btcKey = new Bitcoin.ECKey(bytes);
-						var bitcoinAddress = btcKey.getBitcoinAddress();
-						var privWif = btcKey.getBitcoinWalletImportFormat();
-						document.getElementById("brainbtcaddress").innerHTML = bitcoinAddress;
+						var btcKey = new Peercoin.ECKey(bytes);
+						var peercoinAddress = btcKey.getPeercoinAddress();
+						var privWif = btcKey.getPeercoinWalletImportFormat();
+						document.getElementById("brainbtcaddress").innerHTML = peercoinAddress;
 						document.getElementById("brainbtcprivwif").innerHTML = privWif;
 						ninja.qrCode.showQrCode({
-							"brainqrcodepublic": bitcoinAddress,
+							"brainqrcodepublic": peercoinAddress,
 							"brainqrcodeprivate": privWif
 						});
 						document.getElementById("brainkeyarea").style.visibility = "visible";
@@ -5816,9 +5815,9 @@
 			},
 
 			generateKeyPair: function () {
-				var key = new Bitcoin.ECKey(false);
+				var key = new Peercoin.ECKey(false);
 				var publicKey = key.getPubKeyHex();
-				var privateKey = key.getBitcoinHexFormat();
+				var privateKey = key.getPeercoinHexFormat();
 				document.getElementById("vanitypubkey").innerHTML = publicKey;
 				document.getElementById("vanityprivatekey").innerHTML = privateKey;
 				document.getElementById("vanityarea").style.display = "block";
@@ -5827,7 +5826,7 @@
 
 			addKeys: function () {
 				var privateKeyWif = ninja.translator.get("vanityinvalidinputcouldnotcombinekeys");
-				var bitcoinAddress = ninja.translator.get("vanityinvalidinputcouldnotcombinekeys");
+				var peercoinAddress = ninja.translator.get("vanityinvalidinputcouldnotcombinekeys");
 				var publicKeyHex = ninja.translator.get("vanityinvalidinputcouldnotcombinekeys");
 				try {
 					var input1KeyString = document.getElementById("vanityinput1").value;
@@ -5843,7 +5842,7 @@
 							}
 							else {
 								privateKeyWif = ninja.translator.get("vanityprivatekeyonlyavailable");
-								bitcoinAddress = ninja.publicKey.getBitcoinAddressFromByteArray(pubKeyByteArray);
+								peercoinAddress = ninja.publicKey.getPeercoinAddressFromByteArray(pubKeyByteArray);
 								publicKeyHex = ninja.publicKey.getHexFromByteArray(pubKeyByteArray);
 							}
 						}
@@ -5857,7 +5856,7 @@
 						) {
 						privateKeyWif = ninja.translator.get("vanityprivatekeyonlyavailable");
 						var pubKeyHex = (ninja.publicKey.isPublicKeyHexFormat(input1KeyString)) ? input1KeyString : input2KeyString;
-						var ecKey = (ninja.privateKey.isPrivateKey(input1KeyString)) ? new Bitcoin.ECKey(input1KeyString) : new Bitcoin.ECKey(input2KeyString);
+						var ecKey = (ninja.privateKey.isPrivateKey(input1KeyString)) ? new Peercoin.ECKey(input1KeyString) : new Peercoin.ECKey(input2KeyString);
 						// add 
 						if (document.getElementById("vanityradioadd").checked) {
 							var pubKeyCombined = ninja.publicKey.getByteArrayFromAdding(pubKeyHex, ecKey.getPubKeyHex());
@@ -5869,7 +5868,7 @@
 						if (pubKeyCombined == null) {
 							alert(ninja.translator.get("vanityalertinvalidinputpublickeysmatch"));
 						} else {
-							bitcoinAddress = ninja.publicKey.getBitcoinAddressFromByteArray(pubKeyCombined);
+							peercoinAddress = ninja.publicKey.getPeercoinAddressFromByteArray(pubKeyCombined);
 							publicKeyHex = ninja.publicKey.getHexFromByteArray(pubKeyCombined);
 						}
 					}
@@ -5888,8 +5887,8 @@
 							alert(ninja.translator.get("vanityalertinvalidinputprivatekeysmatch"));
 						}
 						else {
-							bitcoinAddress = combinedPrivateKey.getBitcoinAddress();
-							privateKeyWif = combinedPrivateKey.getBitcoinWalletImportFormat();
+							peercoinAddress = combinedPrivateKey.getPeercoinAddress();
+							privateKeyWif = combinedPrivateKey.getPeercoinWalletImportFormat();
 							publicKeyHex = combinedPrivateKey.getPubKeyHex();
 						}
 					}
@@ -5897,7 +5896,7 @@
 					alert(e);
 				}
 				document.getElementById("vanityprivatekeywif").innerHTML = privateKeyWif;
-				document.getElementById("vanityaddress").innerHTML = bitcoinAddress;
+				document.getElementById("vanityaddress").innerHTML = peercoinAddress;
 				document.getElementById("vanitypublickeyhex").innerHTML = publicKeyHex;
 				document.getElementById("vanitystep2area").style.display = "block";
 				document.getElementById("vanitystep2icon").setAttribute("class", "less");
@@ -5932,7 +5931,7 @@
 			viewDetails: function () {
 				var key = document.getElementById("detailprivkey").value.toString().replace(/^\s+|\s+$/g, ""); // trim white space
 				document.getElementById("detailprivkey").value = key;
-				if (Bitcoin.ECKey.isMiniFormat(key)) {
+				if (Peercoin.ECKey.isMiniFormat(key)) {
 					// show Private Key Mini Format
 					document.getElementById("detailprivmini").innerHTML = key;
 					document.getElementById("detailmini").style.display = "block";
@@ -5941,7 +5940,7 @@
 					// hide Private Key Mini Format
 					document.getElementById("detailmini").style.display = "none";
 				}
-				var btcKey = new Bitcoin.ECKey(key);
+				var btcKey = new Peercoin.ECKey(key);
 				if (btcKey.priv == null) {
 					// enforce a minimum passphrase length
 					if (key.length >= ninja.wallets.brainwallet.minPassphraseLength) {
@@ -5949,7 +5948,7 @@
 						var usePassphrase = confirm(ninja.translator.get("detailconfirmsha256"));
 						if (usePassphrase) {
 							var bytes = Crypto.SHA256(key, { asBytes: true });
-							var btcKey = new Bitcoin.ECKey(bytes);
+							var btcKey = new Peercoin.ECKey(bytes);
 						}
 						else {
 							ninja.wallets.detailwallet.clear();
@@ -5964,21 +5963,21 @@
 					btcKey.setCompressed(false);
 					document.getElementById("detailprivhex").innerHTML = btcKey.toString().toUpperCase();
 					document.getElementById("detailprivb64").innerHTML = btcKey.toString("base64");
-					var bitcoinAddress = btcKey.getBitcoinAddress();
-					var wif = btcKey.getBitcoinWalletImportFormat();
+					var peercoinAddress = btcKey.getPeercoinAddress();
+					var wif = btcKey.getPeercoinWalletImportFormat();
 					document.getElementById("detailpubkey").innerHTML = btcKey.getPubKeyHex();
-					document.getElementById("detailaddress").innerHTML = bitcoinAddress;
+					document.getElementById("detailaddress").innerHTML = peercoinAddress;
 					document.getElementById("detailprivwif").innerHTML = wif;
 					btcKey.setCompressed(true);
-					var bitcoinAddressComp = btcKey.getBitcoinAddress();
-					var wifComp = btcKey.getBitcoinWalletImportFormat();
+					var peercoinAddressComp = btcKey.getPeercoinAddress();
+					var wifComp = btcKey.getPeercoinWalletImportFormat();
 					document.getElementById("detailpubkeycomp").innerHTML = btcKey.getPubKeyHex();
-					document.getElementById("detailaddresscomp").innerHTML = bitcoinAddressComp;
+					document.getElementById("detailaddresscomp").innerHTML = peercoinAddressComp;
 					document.getElementById("detailprivwifcomp").innerHTML = wifComp;
 
 					ninja.qrCode.showQrCode({
-						"detailqrcodepublic": bitcoinAddress,
-						"detailqrcodepubliccomp": bitcoinAddressComp,
+						"detailqrcodepublic": peercoinAddress,
+						"detailqrcodepubliccomp": peercoinAddressComp,
 						"detailqrcodeprivate": wif,
 						"detailqrcodeprivatecomp": wifComp
 					});
@@ -6065,9 +6064,9 @@
 					}
 					return true;
 				},
-				testGetBitcoinAddressFromByteArray: function () {
+				testGetPeercoinAddressFromByteArray: function () {
 					var bytes = [4, 120, 152, 47, 64, 250, 12, 11, 122, 85, 113, 117, 131, 175, 201, 154, 78, 223, 211, 1, 162, 114, 157, 197, 155, 11, 142, 185, 225, 134, 146, 188, 181, 33, 240, 84, 250, 217, 130, 175, 76, 193, 147, 58, 253, 31, 27, 86, 62, 167, 121, 166, 170, 108, 206, 54, 163, 11, 148, 125, 214, 83, 230, 62, 68];
-					var address = ninja.publicKey.getBitcoinAddressFromByteArray(bytes);
+					var address = ninja.publicKey.getPeercoinAddressFromByteArray(bytes);
 					if (address != "1Cnz9ULjzBPYhDw1J8bpczDWCEXnC9HuU1") {
 						return false;
 					}
@@ -6122,7 +6121,7 @@
 				testGetByteArrayFromMultiplying: function () {
 					var key1 = "0478982F40FA0C0B7A55717583AFC99A4EDFD301A2729DC59B0B8EB9E18692BCB521F054FAD982AF4CC1933AFD1F1B563EA779A6AA6CCE36A30B947DD653E63E44";
 					var key2 = "SQE6yipP5oW8RBaStWoB47xsRQ8pat";
-					var bytes = ninja.publicKey.getByteArrayFromMultiplying(key1, new Bitcoin.ECKey(key2));
+					var bytes = ninja.publicKey.getByteArrayFromMultiplying(key1, new Peercoin.ECKey(key2));
 					if (bytes.toString() != "4,102,230,163,180,107,9,21,17,48,35,245,227,110,199,119,144,57,41,112,64,245,182,40,224,41,230,41,5,26,206,138,57,115,35,54,105,7,180,5,106,217,57,229,127,174,145,215,79,121,163,191,211,143,215,50,48,156,211,178,72,226,68,150,52") {
 						return false;
 					}
@@ -6131,7 +6130,7 @@
 				testGetByteArrayFromMultiplyingCompressedOutputsUncompressed: function () {
 					var key1 = "0278982F40FA0C0B7A55717583AFC99A4EDFD301A2729DC59B0B8EB9E18692BCB5";
 					var key2 = "SQE6yipP5oW8RBaStWoB47xsRQ8pat";
-					var bytes = ninja.publicKey.getByteArrayFromMultiplying(key1, new Bitcoin.ECKey(key2));
+					var bytes = ninja.publicKey.getByteArrayFromMultiplying(key1, new Peercoin.ECKey(key2));
 					if (bytes.toString() != "4,102,230,163,180,107,9,21,17,48,35,245,227,110,199,119,144,57,41,112,64,245,182,40,224,41,230,41,5,26,206,138,57,115,35,54,105,7,180,5,106,217,57,229,127,174,145,215,79,121,163,191,211,143,215,50,48,156,211,178,72,226,68,150,52") {
 						return false;
 					}
@@ -6140,7 +6139,7 @@
 				testGetByteArrayFromMultiplyingCompressedOutputsCompressed: function () {
 					var key1 = "0278982F40FA0C0B7A55717583AFC99A4EDFD301A2729DC59B0B8EB9E18692BCB5";
 					var key2 = "L1n4cgNZAo2KwdUc15zzstvo1dcxpBw26NkrLqfDZtU9AEbPkLWu";
-					var ecKey = new Bitcoin.ECKey(key2);
+					var ecKey = new Peercoin.ECKey(key2);
 					var bytes = ninja.publicKey.getByteArrayFromMultiplying(key1, ecKey);
 					if (bytes.toString() != "2,102,230,163,180,107,9,21,17,48,35,245,227,110,199,119,144,57,41,112,64,245,182,40,224,41,230,41,5,26,206,138,57") {
 						return false;
@@ -6150,7 +6149,7 @@
 				testGetByteArrayFromMultiplyingShouldReturnNullWhenSameKey1: function () {
 					var key1 = "0478982F40FA0C0B7A55717583AFC99A4EDFD301A2729DC59B0B8EB9E18692BCB521F054FAD982AF4CC1933AFD1F1B563EA779A6AA6CCE36A30B947DD653E63E44";
 					var key2 = "5J8QhiQtAiozKwyk3GCycAscg1tNaYhNdiiLey8vaDK8Bzm4znb";
-					var bytes = ninja.publicKey.getByteArrayFromMultiplying(key1, new Bitcoin.ECKey(key2));
+					var bytes = ninja.publicKey.getByteArrayFromMultiplying(key1, new Peercoin.ECKey(key2));
 					if (bytes != null) {
 						return false;
 					}
@@ -6159,7 +6158,7 @@
 				testGetByteArrayFromMultiplyingShouldReturnNullWhenSameKey2: function () {
 					var key1 = "0278982F40FA0C0B7A55717583AFC99A4EDFD301A2729DC59B0B8EB9E18692BCB5";
 					var key2 = "KxbhchnQquYQ2dfSxz7rrEaQTCukF4uCV57TkamyTbLzjFWcdi3S";
-					var bytes = ninja.publicKey.getByteArrayFromMultiplying(key1, new Bitcoin.ECKey(key2));
+					var bytes = ninja.publicKey.getByteArrayFromMultiplying(key1, new Peercoin.ECKey(key2));
 					if (bytes != null) {
 						return false;
 					}
@@ -6169,7 +6168,7 @@
 				testGetPubHexFromMultiplyingPrivAPubB: function () {
 					var keyPub = "04F04BF260DCCC46061B5868F60FE962C77B5379698658C98A93C3129F5F98938020F36EBBDE6F1BEAF98E5BD0E425747E68B0F2FB7A2A59EDE93F43C0D78156FF";
 					var keyPriv = "B1202A137E917536B3B4C5010C3FF5DDD4784917B3EEF21D3A3BF21B2E03310C";
-					var bytes = ninja.publicKey.getByteArrayFromMultiplying(keyPub, new Bitcoin.ECKey(keyPriv));
+					var bytes = ninja.publicKey.getByteArrayFromMultiplying(keyPub, new Peercoin.ECKey(keyPriv));
 					var pubHex = ninja.publicKey.getHexFromByteArray(bytes);
 					if (pubHex != "04C6732006AF4AE571C7758DF7A7FB9E3689DFCF8B53D8724D3A15517D8AB1B4DBBE0CB8BB1C4525F8A3001771FC7E801D3C5986A555E2E9441F1AD6D181356076") {
 						return false;
@@ -6180,7 +6179,7 @@
 				testGetPubHexFromMultiplyingPrivBPubA: function () {
 					var keyPub = "0429BF26C0AF7D31D608474CEBD49DA6E7C541B8FAD95404B897643476CE621CFD05E24F7AE8DE8033AADE5857DB837E0B704A31FDDFE574F6ECA879643A0D3709";
 					var keyPriv = "7DE52819F1553C2BFEDE6A2628B6FDDF03C2A07EB21CF77ACA6C2C3D252E1FD9";
-					var bytes = ninja.publicKey.getByteArrayFromMultiplying(keyPub, new Bitcoin.ECKey(keyPriv));
+					var bytes = ninja.publicKey.getByteArrayFromMultiplying(keyPub, new Peercoin.ECKey(keyPriv));
 					var pubHex = ninja.publicKey.getHexFromByteArray(bytes);
 					if (pubHex != "04C6732006AF4AE571C7758DF7A7FB9E3689DFCF8B53D8724D3A15517D8AB1B4DBBE0CB8BB1C4525F8A3001771FC7E801D3C5986A555E2E9441F1AD6D181356076") {
 						return false;
@@ -6190,33 +6189,33 @@
 
 				// Private Key tests
 				testBadKeyIsNotWif: function () {
-					return !(Bitcoin.ECKey.isWalletImportFormat("bad key"));
+					return !(Peercoin.ECKey.isWalletImportFormat("bad key"));
 				},
 				testBadKeyIsNotWifCompressed: function () {
-					return !(Bitcoin.ECKey.isCompressedWalletImportFormat("bad key"));
+					return !(Peercoin.ECKey.isCompressedWalletImportFormat("bad key"));
 				},
 				testBadKeyIsNotHex: function () {
-					return !(Bitcoin.ECKey.isHexFormat("bad key"));
+					return !(Peercoin.ECKey.isHexFormat("bad key"));
 				},
 				testBadKeyIsNotBase64: function () {
-					return !(Bitcoin.ECKey.isBase64Format("bad key"));
+					return !(Peercoin.ECKey.isBase64Format("bad key"));
 				},
 				testBadKeyIsNotMini: function () {
-					return !(Bitcoin.ECKey.isMiniFormat("bad key"));
+					return !(Peercoin.ECKey.isMiniFormat("bad key"));
 				},
 				testBadKeyReturnsNullPrivFromECKey: function () {
 					var key = "bad key";
-					var ecKey = new Bitcoin.ECKey(key);
+					var ecKey = new Peercoin.ECKey(key);
 					if (ecKey.priv != null) {
 						return false;
 					}
 					return true;
 				},
-				testGetBitcoinPrivateKeyByteArray: function () {
+				testGetPeercoinPrivateKeyByteArray: function () {
 					var key = "5J8QhiQtAiozKwyk3GCycAscg1tNaYhNdiiLey8vaDK8Bzm4znb";
 					var bytes = [41, 38, 101, 195, 135, 36, 24, 173, 241, 218, 127, 250, 58, 100, 111, 47, 6, 2, 36, 109, 166, 9, 138, 145, 210, 41, 195, 33, 80, 242, 113, 139];
-					var btcKey = new Bitcoin.ECKey(key);
-					if (btcKey.getBitcoinPrivateKeyByteArray().toString() != bytes.toString()) {
+					var btcKey = new Peercoin.ECKey(key);
+					if (btcKey.getPeercoinPrivateKeyByteArray().toString() != bytes.toString()) {
 						return false;
 					}
 					return true;
@@ -6224,7 +6223,7 @@
 				testECKeyDecodeWalletImportFormat: function () {
 					var key = "5J8QhiQtAiozKwyk3GCycAscg1tNaYhNdiiLey8vaDK8Bzm4znb";
 					var bytes1 = [41, 38, 101, 195, 135, 36, 24, 173, 241, 218, 127, 250, 58, 100, 111, 47, 6, 2, 36, 109, 166, 9, 138, 145, 210, 41, 195, 33, 80, 242, 113, 139];
-					var bytes2 = Bitcoin.ECKey.decodeWalletImportFormat(key);
+					var bytes2 = Peercoin.ECKey.decodeWalletImportFormat(key);
 					if (bytes1.toString() != bytes2.toString()) {
 						return false;
 					}
@@ -6233,7 +6232,7 @@
 				testECKeyDecodeCompressedWalletImportFormat: function () {
 					var key = "KxbhchnQquYQ2dfSxz7rrEaQTCukF4uCV57TkamyTbLzjFWcdi3S";
 					var bytes1 = [41, 38, 101, 195, 135, 36, 24, 173, 241, 218, 127, 250, 58, 100, 111, 47, 6, 2, 36, 109, 166, 9, 138, 145, 210, 41, 195, 33, 80, 242, 113, 139];
-					var bytes2 = Bitcoin.ECKey.decodeCompressedWalletImportFormat(key);
+					var bytes2 = Peercoin.ECKey.decodeCompressedWalletImportFormat(key);
 					if (bytes1.toString() != bytes2.toString()) {
 						return false;
 					}
@@ -6241,7 +6240,7 @@
 				},
 				testWifToPubKeyHex: function () {
 					var key = "5J8QhiQtAiozKwyk3GCycAscg1tNaYhNdiiLey8vaDK8Bzm4znb";
-					var btcKey = new Bitcoin.ECKey(key);
+					var btcKey = new Peercoin.ECKey(key);
 					if (btcKey.getPubKeyHex() != "0478982F40FA0C0B7A55717583AFC99A4EDFD301A2729DC59B0B8EB9E18692BCB521F054FAD982AF4CC1933AFD1F1B563EA779A6AA6CCE36A30B947DD653E63E44"
 						|| btcKey.getPubPoint().compressed != false) {
 						return false;
@@ -6250,7 +6249,7 @@
 				},
 				testWifToPubKeyHexCompressed: function () {
 					var key = "5J8QhiQtAiozKwyk3GCycAscg1tNaYhNdiiLey8vaDK8Bzm4znb";
-					var btcKey = new Bitcoin.ECKey(key);
+					var btcKey = new Peercoin.ECKey(key);
 					btcKey.setCompressed(true);
 					if (btcKey.getPubKeyHex() != "0278982F40FA0C0B7A55717583AFC99A4EDFD301A2729DC59B0B8EB9E18692BCB5"
 						|| btcKey.getPubPoint().compressed != true) {
@@ -6260,24 +6259,24 @@
 				},
 				testBase64ToECKey: function () {
 					var key = "KSZlw4ckGK3x2n/6OmRvLwYCJG2mCYqR0inDIVDycYs=";
-					var btcKey = new Bitcoin.ECKey(key);
-					if (btcKey.getBitcoinBase64Format() != "KSZlw4ckGK3x2n/6OmRvLwYCJG2mCYqR0inDIVDycYs=") {
+					var btcKey = new Peercoin.ECKey(key);
+					if (btcKey.getPeercoinBase64Format() != "KSZlw4ckGK3x2n/6OmRvLwYCJG2mCYqR0inDIVDycYs=") {
 						return false;
 					}
 					return true;
 				},
 				testHexToECKey: function () {
 					var key = "292665C3872418ADF1DA7FFA3A646F2F0602246DA6098A91D229C32150F2718B";
-					var btcKey = new Bitcoin.ECKey(key);
-					if (btcKey.getBitcoinHexFormat() != "292665C3872418ADF1DA7FFA3A646F2F0602246DA6098A91D229C32150F2718B") {
+					var btcKey = new Peercoin.ECKey(key);
+					if (btcKey.getPeercoinHexFormat() != "292665C3872418ADF1DA7FFA3A646F2F0602246DA6098A91D229C32150F2718B") {
 						return false;
 					}
 					return true;
 				},
 				testCompressedWifToECKey: function () {
 					var key = "KxbhchnQquYQ2dfSxz7rrEaQTCukF4uCV57TkamyTbLzjFWcdi3S";
-					var btcKey = new Bitcoin.ECKey(key);
-					if (btcKey.getBitcoinWalletImportFormat() != "KxbhchnQquYQ2dfSxz7rrEaQTCukF4uCV57TkamyTbLzjFWcdi3S"
+					var btcKey = new Peercoin.ECKey(key);
+					if (btcKey.getPeercoinWalletImportFormat() != "KxbhchnQquYQ2dfSxz7rrEaQTCukF4uCV57TkamyTbLzjFWcdi3S"
 						|| btcKey.getPubPoint().compressed != true) {
 						return false;
 					}
@@ -6285,25 +6284,25 @@
 				},
 				testWifToECKey: function () {
 					var key = "5J8QhiQtAiozKwyk3GCycAscg1tNaYhNdiiLey8vaDK8Bzm4znb";
-					var btcKey = new Bitcoin.ECKey(key);
-					if (btcKey.getBitcoinWalletImportFormat() != "5J8QhiQtAiozKwyk3GCycAscg1tNaYhNdiiLey8vaDK8Bzm4znb") {
+					var btcKey = new Peercoin.ECKey(key);
+					if (btcKey.getPeercoinWalletImportFormat() != "5J8QhiQtAiozKwyk3GCycAscg1tNaYhNdiiLey8vaDK8Bzm4znb") {
 						return false;
 					}
 					return true;
 				},
 				testBrainToECKey: function () {
-					var key = "bitaddress.org unit test";
+					var key = "wallet.peercontalk.org unit test";
 					var bytes = Crypto.SHA256(key, { asBytes: true });
-					var btcKey = new Bitcoin.ECKey(bytes);
-					if (btcKey.getBitcoinWalletImportFormat() != "5J8QhiQtAiozKwyk3GCycAscg1tNaYhNdiiLey8vaDK8Bzm4znb") {
+					var btcKey = new Peercoin.ECKey(bytes);
+					if (btcKey.getPeercoinWalletImportFormat() != "5J8QhiQtAiozKwyk3GCycAscg1tNaYhNdiiLey8vaDK8Bzm4znb") {
 						return false;
 					}
 					return true;
 				},
 				testMini30CharsToECKey: function () {
 					var key = "SQE6yipP5oW8RBaStWoB47xsRQ8pat";
-					var btcKey = new Bitcoin.ECKey(key);
-					if (btcKey.getBitcoinWalletImportFormat() != "5JrBLQseeZdYw4jWEAHmNxGMr5fxh9NJU3fUwnv4khfKcg2rJVh") {
+					var btcKey = new Peercoin.ECKey(key);
+					if (btcKey.getPeercoinWalletImportFormat() != "5JrBLQseeZdYw4jWEAHmNxGMr5fxh9NJU3fUwnv4khfKcg2rJVh") {
 						return false;
 					}
 					return true;
@@ -6312,7 +6311,7 @@
 					var key1 = "5J8QhiQtAiozKwyk3GCycAscg1tNaYhNdiiLey8vaDK8Bzm4znb";
 					var key2 = "SQE6yipP5oW8RBaStWoB47xsRQ8pat";
 					var ecKey = ninja.privateKey.getECKeyFromAdding(key1, key2);
-					if (ecKey.getBitcoinWalletImportFormat() != "5KAJTSqSjpsZ11KyEE3qu5PrJVjR4ZCbNxK3Nb1F637oe41m1c2") {
+					if (ecKey.getPeercoinWalletImportFormat() != "5KAJTSqSjpsZ11KyEE3qu5PrJVjR4ZCbNxK3Nb1F637oe41m1c2") {
 						return false;
 					}
 					return true;
@@ -6321,7 +6320,7 @@
 					var key1 = "KxbhchnQquYQ2dfSxz7rrEaQTCukF4uCV57TkamyTbLzjFWcdi3S";
 					var key2 = "L1n4cgNZAo2KwdUc15zzstvo1dcxpBw26NkrLqfDZtU9AEbPkLWu";
 					var ecKey = ninja.privateKey.getECKeyFromAdding(key1, key2);
-					if (ecKey.getBitcoinWalletImportFormat() != "L3A43j2pc2J8F2SjBNbYprPrcDpDCh8Aju8dUH65BEM2r7RFSLv4") {
+					if (ecKey.getPeercoinWalletImportFormat() != "L3A43j2pc2J8F2SjBNbYprPrcDpDCh8Aju8dUH65BEM2r7RFSLv4") {
 						return false;
 					}
 					return true;
@@ -6330,7 +6329,7 @@
 					var key1 = "5J8QhiQtAiozKwyk3GCycAscg1tNaYhNdiiLey8vaDK8Bzm4znb";
 					var key2 = "L1n4cgNZAo2KwdUc15zzstvo1dcxpBw26NkrLqfDZtU9AEbPkLWu";
 					var ecKey = ninja.privateKey.getECKeyFromAdding(key1, key2);
-					if (ecKey.getBitcoinWalletImportFormat() != "5KAJTSqSjpsZ11KyEE3qu5PrJVjR4ZCbNxK3Nb1F637oe41m1c2") {
+					if (ecKey.getPeercoinWalletImportFormat() != "5KAJTSqSjpsZ11KyEE3qu5PrJVjR4ZCbNxK3Nb1F637oe41m1c2") {
 						return false;
 					}
 					return true;
@@ -6357,7 +6356,7 @@
 					var key1 = "5J8QhiQtAiozKwyk3GCycAscg1tNaYhNdiiLey8vaDK8Bzm4znb";
 					var key2 = "SQE6yipP5oW8RBaStWoB47xsRQ8pat";
 					var ecKey = ninja.privateKey.getECKeyFromMultiplying(key1, key2);
-					if (ecKey.getBitcoinWalletImportFormat() != "5KetpZ5mCGagCeJnMmvo18n4iVrtPSqrpnW5RP92Gv2BQy7GPCk") {
+					if (ecKey.getPeercoinWalletImportFormat() != "5KetpZ5mCGagCeJnMmvo18n4iVrtPSqrpnW5RP92Gv2BQy7GPCk") {
 						return false;
 					}
 					return true;
@@ -6366,7 +6365,7 @@
 					var key1 = "KxbhchnQquYQ2dfSxz7rrEaQTCukF4uCV57TkamyTbLzjFWcdi3S";
 					var key2 = "L1n4cgNZAo2KwdUc15zzstvo1dcxpBw26NkrLqfDZtU9AEbPkLWu";
 					var ecKey = ninja.privateKey.getECKeyFromMultiplying(key1, key2);
-					if (ecKey.getBitcoinWalletImportFormat() != "L5LFitc24jme2PfVChJS3bKuQAPBp54euuqLWciQdF2CxnaU3M8t") {
+					if (ecKey.getPeercoinWalletImportFormat() != "L5LFitc24jme2PfVChJS3bKuQAPBp54euuqLWciQdF2CxnaU3M8t") {
 						return false;
 					}
 					return true;
@@ -6375,7 +6374,7 @@
 					var key1 = "5J8QhiQtAiozKwyk3GCycAscg1tNaYhNdiiLey8vaDK8Bzm4znb";
 					var key2 = "L1n4cgNZAo2KwdUc15zzstvo1dcxpBw26NkrLqfDZtU9AEbPkLWu";
 					var ecKey = ninja.privateKey.getECKeyFromMultiplying(key1, key2);
-					if (ecKey.getBitcoinWalletImportFormat() != "5KetpZ5mCGagCeJnMmvo18n4iVrtPSqrpnW5RP92Gv2BQy7GPCk") {
+					if (ecKey.getPeercoinWalletImportFormat() != "5KetpZ5mCGagCeJnMmvo18n4iVrtPSqrpnW5RP92Gv2BQy7GPCk") {
 						return false;
 					}
 					return true;
@@ -6421,16 +6420,16 @@
 				// old bugs
 				testBugWithLeadingZeroBytePublicKey: function () {
 					var key = "5Je7CkWTzgdo1RpwjYhwnVKxQXt8EPRq17WZFtWcq5umQdsDtTP";
-					var btcKey = new Bitcoin.ECKey(key);
-					if (btcKey.getBitcoinAddress() != "1M6dsMZUjFxjdwsyVk8nJytWcfr9tfUa9E") {
+					var btcKey = new Peercoin.ECKey(key);
+					if (btcKey.getPeercoinAddress() != "1M6dsMZUjFxjdwsyVk8nJytWcfr9tfUa9E") {
 						return false;
 					}
 					return true;
 				},
 				testBugWithLeadingZeroBytePrivateKey: function () {
 					var key = "0004d30da67214fa65a41a6493576944c7ea86713b14db437446c7a8df8e13da";
-					var btcKey = new Bitcoin.ECKey(key);
-					if (btcKey.getBitcoinAddress() != "1NAjZjF81YGfiJ3rTKc7jf1nmZ26KN7Gkn") {
+					var btcKey = new Peercoin.ECKey(key);
+					if (btcKey.getPeercoinAddress() != "1NAjZjF81YGfiJ3rTKc7jf1nmZ26KN7Gkn") {
 						return false;
 					}
 					return true;
@@ -6458,8 +6457,8 @@
 			document.getElementById("testnet").style.display = "block";
 			document.getElementById("detailwifprefix").innerHTML = "'9'";
 			document.getElementById("detailcompwifprefix").innerHTML = "'c'";
-			Bitcoin.Address.networkVersion = 0x6F; // testnet
-			Bitcoin.ECKey.privateKeyPrefix = 0xEF; // testnet
+			Peercoin.Address.networkVersion = 0x6F; // testnet
+			Peercoin.ECKey.privateKeyPrefix = 0xEF; // testnet
 			ninja.testnetMode = true;
 		}
 

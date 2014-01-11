@@ -1,21 +1,21 @@
-bitaddress.org
-JavaScript Client-Side Bitcoin Wallet Generator
+http://wallet.peercointalk.org
+JavaScript Client-Side Peercoin Wallet Generator
 
-Now Bitcoin addresses and their corresponding private key can be conveniently 
+Now Peercoin addresses and their corresponding private key can be conveniently 
 generated in a web browser.
 
-The bitaddress.org project provides an all-in-one HTML document with embedded
+The wallet.peercointalk.org project provides an all-in-one HTML document with embedded
 JavaScript/Css/Images. The JavaScript is readable not minified and contains no
 XMLHttpRequest's (no AJAX). The benefit of this technique is you can load the 
 JavaScript locally and trust that the JavaScript did not change after being 
 loaded. 
 
-Here is a link to the BitcoinTalk.org forum topic discussing this project:
-https://bitcointalk.org/index.php?topic=43496.0
+Here is a link to the peercointalk.org forum topic discussing this project:
+http://www.peercointalk.org/index.php?topic=1943.0
 
 
-Please send DONATIONS for this project to Bitcoin Address: 
-1NiNja1bUmhSoTXozBRBEtR8LeF9TGbZBN
+Please send DONATIONS for this project to Peercoin Address: 
+PPW6NBgZzWXzW89HRg3V4M77eM3Zu5yDcR
 
 
 END USER NOTES: 
@@ -32,8 +32,8 @@ END USER NOTES:
 
 Notice of Copyrights and Licenses:
 ---------------------------------------
-The bitaddress.org project, software and embedded resources are copyright bitaddress.org. 
-The bitaddress.org name and logo are not part of the open source license.
+The wallet.peercointalk.org project, software and embedded resources are copyright peercointalk.org 
+The wallet.peercointalk.org name and logo are not part of the open source license.
 
 Portions of the all-in-one HTML document contain JavaScript codes that are the copyrights 
 of others. The individual copyrights are included throughout the document along with their 
@@ -45,13 +45,13 @@ JavaScript function		License
 Array.prototype.map		Public Domain
 window.Crypto			BSD License
 window.SecureRandom		BSD License
-window.EllipticCurve		BSD License
+window.EllipticCurve	BSD License
 window.BigInteger		BSD License
 window.QRCode			MIT License
-window.Bitcoin			MIT License
+window.Peercoin			MIT License
 
-The bitaddress.org software is available under The MIT License (MIT)
-Copyright (c) 2011-2012 bitaddress.org
+The wallet.peercointalk.org software is available under The MIT License (MIT)
+Copyright (c) 2014 wallet.peercointalk.org
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this 
 software and associated documentation files (the "Software"), to deal in the Software 

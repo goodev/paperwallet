@@ -45,7 +45,7 @@ JavaScript function		License
 Array.prototype.map		Public Domain
 window.Crypto			BSD License
 window.SecureRandom		BSD License
-window.EllipticCurve	BSD License
+window.EllipticCurve		BSD License
 window.BigInteger		BSD License
 window.QRCode			MIT License
 window.Peercoin			MIT License

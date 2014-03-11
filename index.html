@@ -4645,7 +4645,10 @@
 		
 		<div id="generate">
 			<span id="generatelabelpeercoinaddress">Generating Peercoin Address...</span><br />
-			<span id="generatelabelmovemouse">MOVE your mouse around to add some extra randomness...</span><br />
+			<span id="generatelabelmovemouse">MOVE your mouse around to add some extra randomness...</span>
+			<br />
+			<br />
+			<span><progress id="generatemovemouseprogress" value="0" max="100"></span>
 		</div>
 
 		<div id="wallets">
@@ -5010,7 +5013,10 @@
 				// seed a bunch (minimum seedLimit) of times based on mouse moves
 				SecureRandom.seedTime();
 				// seed mouse position X and Y
-				if (evt) SecureRandom.seedInt((evt.clientX * evt.clientY));
+				if (evt) {
+					SecureRandom.seedInt((evt.clientX * evt.clientY));
+					document.getElementById("generatemovemouseprogress").value = (ninja.seeder.seedCount / ninja.seeder.seedLimit) * 100;
+				}
 
 				ninja.seeder.seedCount++;
 				// seeding is over now we generate and display the address

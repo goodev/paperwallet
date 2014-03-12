@@ -4497,6 +4497,7 @@
 		#logo { width: 578px; height: 80px; }
 		#generate { font-family: Courier New; height: 158px; text-align: left; position: relative; padding: 5px; border: 2px solid green; }
 		#generate span { padding: 5px 5px 0 5px; }
+		#generatelabelonlinewarning { display: none; }
 		#menu { visibility: hidden; font-size: 90%; }
 		#culturemenu { text-align: right; padding: 0 20px; }
 		#culturemenu span { padding: 3px; }
@@ -4646,11 +4647,18 @@
 		</div>
 		
 		<div id="generate">
+			<span id="generatelabelonlinewarning"><strong>Security suggestion:</strong> It's recommended that you download this page and run it offline to prevent possible network spying/attacks.<br /><br /></span>
 			<span id="generatelabelpeercoinaddress">Generating Peercoin Address...</span><br />
 			<span id="generatelabelmovemouse">MOVE your mouse around to add some extra randomness...</span>
 			<br />
 			<br />
 			<span><progress id="generatemovemouseprogress" value="0" max="100"></span>
+
+			<script type="text/javascript">
+				if(location.protocol === "http:" || location.protocol === "https:") {
+					document.getElementById("generatelabelonlinewarning").style.display="block";
+				}
+			</script>
 		</div>
 
 		<div id="wallets">

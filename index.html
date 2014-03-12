@@ -5039,7 +5039,7 @@
 				// seed mouse position X and Y
 				if (evt) {
 					SecureRandom.seedInt((evt.clientX * evt.clientY));
-					document.getElementById("generatemovemouseprogress").value = (ninja.seeder.seedCount / ninja.seeder.seedLimit) * 100;
+					ninja.seeder.updateProgressBar();
 				}
 
 				ninja.seeder.seedCount++;
@@ -5057,10 +5057,26 @@
 			forceGenerate: function () {
 				// if the mouse has not moved enough
 				if (ninja.seeder.seedCount < ninja.seeder.seedLimit) {
-					SecureRandom.seedTime();
-					ninja.seeder.seedCount = ninja.seeder.seedLimit - 1;
-					ninja.seeder.seed();
+					var randomTimeInterval = 10 + Math.floor(Math.random() * 20);
+					ninja.seeder.timer = setInterval("ninja.seeder.forceGenerateLoop()", randomTimeInterval);
 				}
+			},
+
+			// Force generating seeds on a timer if the user has not provided enough
+			// mouse movements
+			forceGenerateLoop: function() {
+
+				ninja.seeder.seed();
+				ninja.seeder.updateProgressBar();
+
+				// Stop if enough seeds have been generated
+				if (ninja.seeder.seedCount >= ninja.seeder.seedLimit) {
+					clearInterval(ninja.seeder.timer);
+				}
+			},
+
+			updateProgressBar: function() {
+				document.getElementById("generatemovemouseprogress").value = (ninja.seeder.seedCount / ninja.seeder.seedLimit) * 100;
 			}
 		};
 

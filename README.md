@@ -1,12 +1,12 @@
-![Logo](https://raw.github.com/FuzzyBearBTC/peercoin-walletgenerator/master/images/Peercoin_Address_Logo.png)
+![Logo](https://raw.github.com/goodev/paperwallet/master/images/Coffeecoin_Address_Logo.png)
 
-## JavaScript Client-Side Peercoin Wallet Generator
->### [wallet.peercointalk.org](http://wallet.peercointalk.org)
+## JavaScript Client-Side Coffeecoin Wallet Generator
+>### [wallet.coffee4commit.com](http://wallet.coffee4commit.com)
 
-Peercoin addresses and their corresponding private key can now be conveniently
+Coffeecoin addresses and their corresponding private key can now be conveniently
 generated in a web browser.
 
-The [wallet.peercointalk.org](http://wallet.peercointalk.org) project provides an
+The [wallet.coffee4commit.com](http://wallet.coffee4commit.com) project provides an
 all-in-one HTML document with embedded JavaScript/Css/Images. The JavaScript is
 readable (not minified) and contains no XMLHttpRequest's (no AJAX). The benefit
 of this technique is you can load the JavaScript locally and trust that the
@@ -23,7 +23,7 @@ http://www.peercointalk.org/index.php?topic=1943.0
 
 #### Donating
 
-Peercoin Donation Address: **```PPW6NBgZzWXzW89HRg3V4M77eM3Zu5yDcR```**
+Coffeecoin Donation Address: **```PPW6NBgZzWXzW89HRg3V4M77eM3Zu5yDcR```**
 
 ![Donation QR Code](https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=PPW6NBgZzWXzW89HRg3V4M77eM3Zu5yDcR&chld=L|1&choe=UTF-8)
 
@@ -68,8 +68,8 @@ peercoins for each commit you contribute to the project.
 
 Notice of Copyrights and Licenses:
 ---------------------------------------
-The wallet.peercointalk.org project, software and embedded resources are copyright peercointalk.org
-The wallet.peercointalk.org name and logo are not part of the open source license.
+The wallet.coffee4commit.com project, software and embedded resources are copyright peercointalk.org
+The wallet.coffee4commit.com name and logo are not part of the open source license.
 
 Portions of the all-in-one HTML document contain JavaScript codes that are the copyrights
 of others. The individual copyrights are included throughout the document along with their
@@ -85,10 +85,10 @@ Summary of JavaScript functions with a redistributable license:
 | window.EllipticCurve  |   BSD License     |
 | window.BigInteger     |   BSD License     |
 | window.QRCode         |   MIT License     |
-| window.Peercoin       |   MIT License     |
+| window.Coffeecoin     |   MIT License     |
 
-The wallet.peercointalk.org software is available under The MIT License (MIT)
-Copyright (c) 2014 wallet.peercointalk.org
+The wallet.coffee4commit.com software is available under The MIT License (MIT)
+Copyright (c) 2014 wallet.coffee4commit.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

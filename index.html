@@ -6776,7 +6776,7 @@
 							<span id="bulklabelq1">Why should I use a Bulk Wallet to accept Coffeecoins on my website?</span>
 							<div id="bulke1" class="more"></div>
 						</div>
-						<div id="bulka1" class="bulkanswer">The traditional approach to accepting coffeecoins on your website requires that you install the official coffeecoin client daemon ("ppcoind"). Many website hosting packages don't support installing the coffeecoin daemon. Also, running the coffeecoin daemon on your web server means your private keys are hosted on the server and could get stolen if your web server is hacked. When using a Bulk Wallet you can upload only the coffeecoin addresses and not the private keys to your web server. Then you don't have to worry about your coffeecoin wallet being stolen if your web server is hacked. </div>
+						<div id="bulka1" class="bulkanswer">The traditional approach to accepting coffeecoins on your website requires that you install the official coffeecoin client daemon ("coffeecoind"). Many website hosting packages don't support installing the coffeecoin daemon. Also, running the coffeecoin daemon on your web server means your private keys are hosted on the server and could get stolen if your web server is hacked. When using a Bulk Wallet you can upload only the coffeecoin addresses and not the private keys to your web server. Then you don't have to worry about your coffeecoin wallet being stolen if your web server is hacked. </div>
 					</div>
 					<div id="bulkfaq2" class="bulkfaq">
 						<div id="bulkq2" class="bulkquestion" onclick="ninja.wallets.bulkwallet.openCloseFaq(2);">
@@ -6788,7 +6788,7 @@
 							<li id="bulklabela2li1">Use the Bulk Wallet tab to pre-generate a large number of coffeecoin addresses (10,000+). Copy and paste the generated comma separated values (CSV) list to a secure text file on your computer. Backup the file you just created to a secure location.</li>
 							<li id="bulklabela2li2">Import the coffeecoin addresses into a database table on your web server. (Don't put the wallet/private keys on your web server, otherwise you risk hackers stealing your coins. Just the coffeecoin addresses as they will be shown to customers.)</li>
 							<li id="bulklabela2li3">Provide an option on your website's shopping cart for your customer to pay in Coffeecoin. When the customer chooses to pay in Coffeecoin you will then display one of the addresses from your database to the customer as his "payment address" and save it with his shopping cart order.</li>
-							<li id="bulklabela2li4">You now need to be notified when the payment arrives. Google "coffeecoin payment notification" and subscribe to at least one coffeecoin payment notification service. There are various services that will notify you via Web Services, API, SMS, Email, etc. Once you receive this notification, which could be programmatically automated, you can process the customer's order. To manually check if a payment has arrived you can use Block Explorer. Replace THEADDRESSGOESHERE with the coffeecoin address you are checking. It could take between 10 minutes to one hour for the transaction to be confirmed.<br />http://www.blockexplorer.com/address/THEADDRESSGOESHERE<br /><br />Unconfirmed transactions can be viewed at: http://blockchain.coffeecointalk.org/ <br />You should see the transaction there within 30 seconds.</li>
+							<li id="bulklabela2li4">You now need to be notified when the payment arrives. Google "coffeecoin payment notification" and subscribe to at least one coffeecoin payment notification service. There are various services that will notify you via Web Services, API, SMS, Email, etc. Once you receive this notification, which could be programmatically automated, you can process the customer's order. To manually check if a payment has arrived you can use Block Explorer. Replace THEADDRESSGOESHERE with the coffeecoin address you are checking. It could take between 10 minutes to one hour for the transaction to be confirmed.<br />http://www.blockexplorer.com/address/THEADDRESSGOESHERE<br /><br />Unconfirmed transactions can be viewed at blockchain <br />You should see the transaction there within 30 seconds.</li>
 							<li id="bulklabela2li5">Coffeecoins will safely pile up on the block chain. Use the original wallet file you generated in step 1 to spend them.</li>
 							</ol>
 						</div>
@@ -6808,7 +6808,7 @@
 						<span class="label"><label id="brainlabelconfirm" for="brainpassphraseconfirm">Confirm Passphrase:</label> </span>
 						<input tabindex="2" type="password" id="brainpassphraseconfirm" value="" onfocus="this.select();" onkeypress="if (event.keyCode == 13) ninja.wallets.brainwallet.view();" />
 						<span><input tabindex="3" type="button" id="brainview" value="View" onclick="ninja.wallets.brainwallet.view();" /></span>
-						<span id="brainalgorithm" class="notes right"><a href="http://www.coffeecointalk.org/index.php?topic=2004" target="_blank">Before Creating a Brain Wallet please read this thread</a></span>
+						<span id="brainalgorithm" class="notes right"><a href="http://www.peercointalk.org/index.php?topic=2004" target="_blank">Before Creating a Brain Wallet please read this thread</a></span>
 					</div>
 				</div>
 				<div id="brainkeyarea" class="keyarea">
@@ -6840,7 +6840,7 @@
 							<br />
 							<span id="braingeneratedwordlist">NOT GENERATED YET - CLICK THE GENERATE BUTTON!</span>
 							<br />
-							<p><strong>Before using a brain wallet, please ensure you understand the security and risks involved <a href="http://www.coffeecointalk.org/index.php?topic=2004">(Read more)</a>.</strong></p>
+							<p><strong>Before using a brain wallet, please ensure you understand the security and risks involved <a href="http://www.peercointalk.org/index.php?topic=2004">(Read more)</a>.</strong></p>
 							<p>12 Randomly selected words will be generated for you to use as a passphrase for your brain wallet. The <a href="https://raw.github.com/spesmilo/electrum/master/lib/mnemonic.py">word list</a> used here is the same as used by the <a href="https://github.com/spesmilo/electrum">Electrum Wallet</a> program, which is open source and you can take a look at.</p>
 							<p>Copy and paste the generated words into the passphrase boxes above to generate your private key and public address.</p>
 							<p>The generated words will always be lowercase and be separated by a space. Double check you don't have an accidental extra space at the end as this could cause confusion later on.</p>
@@ -6945,13 +6945,13 @@
 					<hr />
 					<div class="item">
 					<div id="detailqrcodeprivate" class="qrcode_private"></div>
-						<span class="label"><span id="detaillabelprivwif">Private Key WIF (51 characters base58, starts with a</span> <span id="detailwifprefix">'7'</span>):</span>
+						<span class="label"><span id="detaillabelprivwif">Private Key WIF (51 characters base58, starts with a</span> <span id="detailwifprefix">'6'</span>):</span>
 						<span class="output" id="detailprivwif"></span>
 					</div>
 					<br /><br />
 					<div class="item right">
 						<div id="detailqrcodeprivatecomp" class="qrcode_private"></div>
-						<span class="label"><span id="detaillabelprivwifcomp">Private Key WIF (compressed, 52 characters base58, starts with a</span> <span id="detailcompwifprefix">'U'</span>):</span>
+						<span class="label"><span id="detaillabelprivwifcomp">Private Key WIF (compressed, 52 characters base58, starts with a</span> <span id="detailcompwifprefix">'Q'</span>):</span>
 						<span class="output" id="detailprivwifcomp"></span>
 					</div>
 					<br /><br />
@@ -7372,7 +7372,7 @@
 					"bulklabelcsv": "Valores separados por coma:",
 					"bulklabelformat": "Índice,Dirección,Clave privada (formato para importar)",
 					"bulklabelq1": "¿Por qué debo usar \"Direcciones en masa\" para aceptar Coffeecoins en mi web?",
-					"bulka1": "La forma tradicional de aceptar coffeecoins en tu web requiere tener instalado el cliente oficial de coffeecoin (\"ppcoind\"). Sin embargo muchos servicios de hosting no permiten instalar dicho cliente. Además, ejecutar el cliente en tu servidor supone que las claves privadas están también en el servidor y podrían ser comprometidas en caso de intrusión Al usar este mecanismo, puedes subir al servidor sólo las dirección de coffeecoin y no las claves privadas. De esta forma no te tienes que preocupar de que alguien robe la cartera si se cuelan en el servidor.",
+					"bulka1": "La forma tradicional de aceptar coffeecoins en tu web requiere tener instalado el cliente oficial de coffeecoin (\"coffeecoind\"). Sin embargo muchos servicios de hosting no permiten instalar dicho cliente. Además, ejecutar el cliente en tu servidor supone que las claves privadas están también en el servidor y podrían ser comprometidas en caso de intrusión Al usar este mecanismo, puedes subir al servidor sólo las dirección de coffeecoin y no las claves privadas. De esta forma no te tienes que preocupar de que alguien robe la cartera si se cuelan en el servidor.",
 					"bulklabelq2": "¿Cómo uso \"Direcciones en masa\" para aceptar coffeecoins en mi web?",
 					"bulklabela2li1": "Usa el tab \"Direcciones en masa\" para generar por anticipado muchas direcciones (má de 10000). Copia y pega la lista de valores separados por comas (CSV) a un archivo de texto seguro (cifrado) en tu ordenador. Guarda una copia de seguridad en algún lugar seguro.",
 					"bulklabela2li2": "Importa las direcciones en la base de datos de tu servidor. No subas la cartera ni las claves públicas, o de lo contrario te lo pueden robar. Sube sólo las direcciones, ya que es lo que se va a mostrar a los clientes.",
@@ -7489,7 +7489,7 @@
 					"bulklabelcsv": "Valeurs séparées par des virgules (CSV):",
 					"bulklabelformat": "Index, Adresse, Clé privée (WIF)",
 					"bulklabelq1": "Pourquoi utiliserais-je un porte-monnaie en vrac pour accepter les Coffeecoins sur mon site web ?",
-					"bulka1": "L'approche traditionnelle pour accepter des Coffeecoins sur votre site web requière l'installation du logiciel Coffeecoin officiel (\"ppcoind\"). Plusieurs forfaits d'hébergement de sites Web ne supportent pas l'installation du logiciel Coffeecoin. De plus, faire fonctionner le logiciel Coffeecoin sur votre serveur web signifie que vos clés privées sont hébergées sur le serveur et pourraient donc être volées si votre serveur est compromis. En utilisant un Porte-monnaie en vrac, vous pouvez publier seulement les adresses Coffeecoin sur votre serveur et non les clé privées. Vous n'avez alors plus à vous inquiéter du risque de vous faire voler votre porte-monnaie si votre serveur est compromis.",
+					"bulka1": "L'approche traditionnelle pour accepter des Coffeecoins sur votre site web requière l'installation du logiciel Coffeecoin officiel (\"coffeecoind\"). Plusieurs forfaits d'hébergement de sites Web ne supportent pas l'installation du logiciel Coffeecoin. De plus, faire fonctionner le logiciel Coffeecoin sur votre serveur web signifie que vos clés privées sont hébergées sur le serveur et pourraient donc être volées si votre serveur est compromis. En utilisant un Porte-monnaie en vrac, vous pouvez publier seulement les adresses Coffeecoin sur votre serveur et non les clé privées. Vous n'avez alors plus à vous inquiéter du risque de vous faire voler votre porte-monnaie si votre serveur est compromis.",
 					"bulklabelq2": "Comment utiliser le Porte-monnaie en vrac pour utiliser le Coffeecoin sur mon site web ?",
 					"bulklabela2li1": "Utilisez le Porte-monnaie en vrac pour protéger une large quantité d'adresses Coffeecoin (10,000+). Copiez collez les données séparées par des virgules (CSV) dans un fichier texte sur votre ordinateur. Sauvegardez ce fichier dans un endroit sécurisé. Idéalement, vous devriez chiffrer ce fichier",
 					"bulklabela2li2": "Importez les adresses Coffeecoin dans une base de donnée sur votre serveur web. (N'ajoutez pas le porte-monnaie ou les clé privées sur votre serveur web, sinon vous risquez de vous faire voler si votre serveur est compromis. Ajoutez seulement les adresses Coffeecoin qui seront visibles de vos visiteurs.)",
@@ -7605,7 +7605,7 @@
 					"bulklabelcsv": "Значения, разделённые запятыми:",
 					"bulklabelformat": "Номер,Адрес,Приватный ключ (формат для импорта)",
 					"bulklabelq1": "Почему стоит использовать массовую генерацию кошельков для приёма платежей в Coffeecoin на моём сайте?",
-					"bulka1": "Для приёма пиркоинов на сайте традиционном способом вам необходимо запустить на сервере официальный клиент Coffeecoin (\"ppcoind\"). На многих хостингах нет возможности это сделать. Кроме того, если вы держите запущенным клиент Coffeecoin, то ваши приватные ключи хранятся на сервере и могут быть украдены, если сервер будет взломан. При использовании массовой генерации вы можете загрузить на сервер только Coffeecoin-адреса, а не приватные ключи. Тогда вы можете не беспокоиться за безопасность Coffeecoin-кошельков, даже если сервер будет взломан.",
+					"bulka1": "Для приёма пиркоинов на сайте традиционном способом вам необходимо запустить на сервере официальный клиент Coffeecoin (\"coffeecoind\"). На многих хостингах нет возможности это сделать. Кроме того, если вы держите запущенным клиент Coffeecoin, то ваши приватные ключи хранятся на сервере и могут быть украдены, если сервер будет взломан. При использовании массовой генерации вы можете загрузить на сервер только Coffeecoin-адреса, а не приватные ключи. Тогда вы можете не беспокоиться за безопасность Coffeecoin-кошельков, даже если сервер будет взломан.",
 					"bulklabelq2": "Как использовать массовую генерацию кошельков для приёма платежей на сайте?",
 					"bulklabela2li1": "Используйте вкладку \"Много адресов\", чтобы сгенерировать заранее большое количество Coffeecoin-адресов (больше 10000). Скопируйте и вставьте список (он в формате CSV) в безопасный текстовый файл на вашем компьютере. Зашифруйте его и сделайте резервную копию.",
 					"bulklabela2li2": "Импортируйте Coffeecoin-адреса в базу данных на вашем сервере. Не держите на сервере приватные ключи, в противном случае взломщики могут украсть ваши пиркоины. Только публичные адреса, в том виде, в каком они будут показаны пользователям.",
@@ -7722,7 +7722,7 @@
 					"bulklabelcsv": "保存为CSV:",
 					"bulklabelformat": "保存为WIF",
 					"bulklabelq1": "我为什么在收款时应该使用多个地址 ?",
-					"bulka1": "传统模式下如果你的网站要使用咖啡币你需要安装 (\"ppcoind\"). 许多服务商不支持安装(\"ppcoind\"). 并且在你的服务器上运行(\"ppcoind\")，意味着你的私钥也在服务器上，一旦被盗，后果不堪设想. 使用批量地址，你就可以只存储地址而不用担心私钥被盗。",
+					"bulka1": "传统模式下如果你的网站要使用咖啡币你需要安装 (\"coffeecoind\"). 许多服务商不支持安装(\"coffeecoind\"). 并且在你的服务器上运行(\"coffeecoind\")，意味着你的私钥也在服务器上，一旦被盗，后果不堪设想. 使用批量地址，你就可以只存储地址而不用担心私钥被盗。",
 					"bulklabelq2": "如何在网站上使用批量地址？",
 					"bulklabela2li1": "限生成10,000+的地址. 把CSV文件拷贝了. 将他放到安全的地方，最好再加个密",
 					"bulklabela2li2": "把地址存到数据库 (不要把私钥等放进去咯，数据库里只放用户可见的地址)",
